@@ -37,11 +37,12 @@ import {
   Sparkle
 } from '@phosphor-icons/react'
 import { useIsMobile } from '@/hooks/use-mobile'
-import heroImage from '@/assets/images/hero-bg.jpg'
-import businessTeamImage from '@/assets/images/business-team.jpg'
-import solarImage from '@/assets/images/solar-panels.jpg'
-import healthcareImage from '@/assets/images/healthcare.jpg'
-import technologyImage from '@/assets/images/technology.jpg'
+// Using working stock images from Unsplash
+const heroImage = 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80'
+const businessTeamImage = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&crop=center&auto=format&q=80'
+const solarImage = 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&h=600&fit=crop&crop=center&auto=format&q=80'
+const healthcareImage = 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop&crop=center&auto=format&q=80'
+const technologyImage = 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop&crop=center&auto=format&q=80'
 
 type PageView = 'home' | 'terms' | 'privacy'
 
@@ -255,7 +256,12 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="hero-section min-h-screen flex items-center justify-center text-white relative overflow-hidden">
+      <section id="home" className="hero-section min-h-screen flex items-center justify-center text-white relative overflow-hidden" style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
         <div className="absolute inset-0 bg-black/20"></div>
         
         {/* Floating elements */}
@@ -1054,7 +1060,12 @@ function App() {
       </section>
 
       {/* Free eBook CTA */}
-      <section className="py-32 hero-section text-white relative overflow-hidden">
+      <section className="py-32 text-white relative overflow-hidden" style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
