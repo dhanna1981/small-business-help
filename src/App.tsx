@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -64,6 +64,8 @@ function App() {
   const annualSolarSavings = (solarUsage[0] * 12 * 0.12 * solarSavings[0]) / 100
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 50)
     }
@@ -73,7 +75,7 @@ function App() {
 
   // Exit intent and mobile timer popup logic
   useEffect(() => {
-    if (hasShownExitPopup) return
+    if (hasShownExitPopup || typeof window === 'undefined') return
 
     if (isMobile) {
       // Mobile: Show popup after 15 seconds
@@ -112,6 +114,19 @@ function App() {
     setIsSubmitting(true)
     
     const formData = new FormData(e.currentTarget)
+    
+    // Safely get IP address
+    let ipAddress = 'Unknown'
+    try {
+      if (typeof window !== 'undefined') {
+        const response = await fetch('https://api.ipify.org?format=json')
+        const data = await response.json()
+        ipAddress = data.ip || 'Unknown'
+      }
+    } catch (error) {
+      console.log('Could not fetch IP address:', error)
+    }
+
     const data = {
       firstName: formData.get('firstName'),
       lastName: formData.get('lastName'),
@@ -119,7 +134,7 @@ function App() {
       phone: formData.get('phone'),
       message: formData.get('message'),
       consent: formData.get('consent'),
-      ipAddress: await fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => d.ip).catch(() => 'Unknown'),
+      ipAddress,
       timestamp: new Date().toISOString()
     }
 
@@ -137,10 +152,23 @@ function App() {
     setIsSubmitting(true)
     
     const formData = new FormData(e.currentTarget)
+    
+    // Safely get IP address
+    let ipAddress = 'Unknown'
+    try {
+      if (typeof window !== 'undefined') {
+        const response = await fetch('https://api.ipify.org?format=json')
+        const data = await response.json()
+        ipAddress = data.ip || 'Unknown'
+      }
+    } catch (error) {
+      console.log('Could not fetch IP address:', error)
+    }
+
     const data = {
       email: formData.get('email'),
       consent: formData.get('ebook-consent'),
-      ipAddress: await fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => d.ip).catch(() => 'Unknown'),
+      ipAddress,
       timestamp: new Date().toISOString()
     }
 
