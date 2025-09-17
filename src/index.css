@@ -87,10 +87,10 @@
 /* Modern Hero Background */
 .hero-section {
   background: linear-gradient(135deg, 
-    oklch(0.35 0.18 250) 0%, 
-    oklch(0.45 0.22 220) 25%,
-    oklch(0.65 0.25 45) 75%,
-    oklch(0.7 0.3 35) 100%);
+    oklch(0.15 0.12 250) 0%, 
+    oklch(0.25 0.15 240) 25%,
+    oklch(0.35 0.18 230) 75%,
+    oklch(0.45 0.22 220) 100%);
   background-size: 400% 400%;
   animation: gradientShift 8s ease-in-out infinite;
   position: relative;
@@ -104,7 +104,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.05)'%3e%3cpath d='m0 .5 32 32M32 .5 0 32'/%3e%3c/svg%3e") repeat;
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.03)'%3e%3cpath d='m0 .5 32 32M32 .5 0 32'/%3e%3c/svg%3e") repeat;
   background-size: 32px 32px;
   animation: float 20s linear infinite;
 }
@@ -112,8 +112,8 @@
 /* Glassmorphism effects */
 .glass-card {
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

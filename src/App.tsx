@@ -283,17 +283,17 @@ function App() {
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto opacity-0 animate-fade-in-up stagger-3">
-              <div className="glass-card rounded-2xl p-6 text-center">
-                <div className="text-3xl font-bold text-accent mb-2">$620</div>
-                <div className="text-sm opacity-80">Avg. Savings Per Employee</div>
+              <div className="glass-card rounded-2xl p-6 text-center border border-white/30 bg-white/10">
+                <div className="text-3xl font-bold text-white mb-2">$620</div>
+                <div className="text-sm text-white/90">Avg. Savings Per Employee</div>
               </div>
-              <div className="glass-card rounded-2xl p-6 text-center">
-                <div className="text-3xl font-bold text-accent mb-2">150+</div>
-                <div className="text-sm opacity-80">Businesses Helped</div>
+              <div className="glass-card rounded-2xl p-6 text-center border border-white/30 bg-white/10">
+                <div className="text-3xl font-bold text-white mb-2">150+</div>
+                <div className="text-sm text-white/90">Businesses Helped</div>
               </div>
-              <div className="glass-card rounded-2xl p-6 text-center">
-                <div className="text-3xl font-bold text-accent mb-2">$2.3M+</div>
-                <div className="text-sm opacity-80">Total Savings Generated</div>
+              <div className="glass-card rounded-2xl p-6 text-center border border-white/30 bg-white/10">
+                <div className="text-3xl font-bold text-white mb-2">$2.3M+</div>
+                <div className="text-sm text-white/90">Total Savings Generated</div>
               </div>
             </div>
             
@@ -1196,26 +1196,6 @@ function App() {
               </Card>
 
               {/* Service Areas */}
-              <Card className="modern-card border-0">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-4">Service Areas</h3>
-                  <div className="space-y-3">
-                    {[
-                      { area: "Nationwide", services: "Most services available" },
-                      { area: "Maine & Illinois", services: "Community Solar programs" },
-                      { area: "Sharon, PA", services: "Headquarters & local services" }
-                    ].map((area, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
-                        <div>
-                          <div className="font-medium text-sm">{area.area}</div>
-                          <div className="text-xs text-muted-foreground">{area.services}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
             </div>
 
             {/* Contact Form */}
