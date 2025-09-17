@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -26,9 +26,22 @@ import {
   Building,
   Download,
   FacebookLogo,
-  LinkedinLogo
+  LinkedinLogo,
+  Heart,
+  Lightbulb,
+  ChartLineUp,
+  Handshake,
+  ArrowRight,
+  CheckCircle,
+  PlayCircle,
+  Sparkle
 } from '@phosphor-icons/react'
 import { useIsMobile } from '@/hooks/use-mobile'
+import heroImage from '@/assets/images/hero-bg.jpg'
+import businessTeamImage from '@/assets/images/business-team.jpg'
+import solarImage from '@/assets/images/solar-panels.jpg'
+import healthcareImage from '@/assets/images/healthcare.jpg'
+import technologyImage from '@/assets/images/technology.jpg'
 
 type PageView = 'home' | 'terms' | 'privacy'
 
@@ -40,10 +53,19 @@ function App() {
   const [solarSavings, setSolarSavings] = useState([15])
   const [showCookieBanner, setShowCookieBanner] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const isMobile = useIsMobile()
 
   const pcmpSavings = pcmpEmployees[0] * 620
   const annualSolarSavings = (solarUsage[0] * 12 * 0.12 * solarSavings[0]) / 100
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
@@ -112,43 +134,87 @@ function App() {
       <Toaster position="top-right" />
       {/* Cookie Banner */}
       {showCookieBanner && (
-        <div className="fixed bottom-0 left-0 right-0 bg-primary text-primary-foreground p-4 z-50">
-          <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm">
-              We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
-            </p>
-            <Button 
-              variant="secondary" 
-              size="sm"
-              onClick={() => setShowCookieBanner(false)}
-            >
-              Accept
-            </Button>
+        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary to-accent text-white p-6 z-50 backdrop-blur-sm border-t border-white/20">
+          <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                <Shield className="h-4 w-4" />
+              </div>
+              <p className="text-sm leading-relaxed">
+                We use cookies to enhance your experience and analyze site performance. 
+                By continuing to visit this site you agree to our use of cookies.
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <Button 
+                variant="outline"
+                size="sm"
+                className="border-white/30 text-white hover:bg-white/10"
+                onClick={() => setCurrentView('privacy')}
+              >
+                Learn More
+              </Button>
+              <Button 
+                size="sm"
+                className="bg-white text-primary hover:bg-white/90 btn-hover-lift"
+                onClick={() => setShowCookieBanner(false)}
+              >
+                Accept All
+              </Button>
+            </div>
           </div>
         </div>
       )}
 
       {/* Header */}
-      <header className="sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b z-40">
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        hasScrolled 
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg' 
+          : 'bg-transparent'
+      }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <h1 className="text-xl font-bold text-primary">Small Business Help Group</h1>
+          <div className="flex justify-between items-center h-20">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                <Sparkle className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-foreground">Small Business Help Group</h1>
+                <p className="text-xs text-muted-foreground">Reduce. Grow. Succeed.</p>
+              </div>
             </div>
             
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              <button onClick={() => scrollToSection('home')} className="text-foreground hover:text-primary transition-colors">Home</button>
-              <button onClick={() => scrollToSection('about')} className="text-foreground hover:text-primary transition-colors">About</button>
-              <button onClick={() => scrollToSection('services')} className="text-foreground hover:text-primary transition-colors">Services</button>
-              <button onClick={() => scrollToSection('calculators')} className="text-foreground hover:text-primary transition-colors">Calculators</button>
-              <button onClick={() => scrollToSection('faq')} className="text-foreground hover:text-primary transition-colors">FAQ</button>
-              <button onClick={() => scrollToSection('contact')} className="text-foreground hover:text-primary transition-colors">Contact</button>
+            <nav className="hidden lg:flex items-center space-x-8">
+              {[
+                { label: 'Home', id: 'home' },
+                { label: 'About', id: 'about' },
+                { label: 'Services', id: 'services' },
+                { label: 'Calculators', id: 'calculators' },
+                { label: 'FAQ', id: 'faq' },
+                { label: 'Contact', id: 'contact' }
+              ].map((item, index) => (
+                <button 
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)} 
+                  className="relative text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 group-hover:w-full"></span>
+                </button>
+              ))}
+              <Button 
+                onClick={() => scrollToSection('contact')}
+                className="btn-hover-lift bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary"
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </nav>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2"
+              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
@@ -158,14 +224,30 @@ function App() {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <nav className="md:hidden py-4 border-t">
+            <nav className="lg:hidden py-6 border-t border-border/50 bg-background/95 backdrop-blur-xl">
               <div className="flex flex-col space-y-4">
-                <button onClick={() => scrollToSection('home')} className="text-left text-foreground hover:text-primary transition-colors">Home</button>
-                <button onClick={() => scrollToSection('about')} className="text-left text-foreground hover:text-primary transition-colors">About</button>
-                <button onClick={() => scrollToSection('services')} className="text-left text-foreground hover:text-primary transition-colors">Services</button>
-                <button onClick={() => scrollToSection('calculators')} className="text-left text-foreground hover:text-primary transition-colors">Calculators</button>
-                <button onClick={() => scrollToSection('faq')} className="text-left text-foreground hover:text-primary transition-colors">FAQ</button>
-                <button onClick={() => scrollToSection('contact')} className="text-left text-foreground hover:text-primary transition-colors">Contact</button>
+                {[
+                  { label: 'Home', id: 'home' },
+                  { label: 'About', id: 'about' },
+                  { label: 'Services', id: 'services' },
+                  { label: 'Calculators', id: 'calculators' },
+                  { label: 'FAQ', id: 'faq' },
+                  { label: 'Contact', id: 'contact' }
+                ].map((item) => (
+                  <button 
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)} 
+                    className="text-left text-foreground hover:text-primary transition-colors py-2 font-medium"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <Button 
+                  onClick={() => scrollToSection('contact')}
+                  className="mt-4 w-full bg-gradient-to-r from-primary to-accent"
+                >
+                  Get Started
+                </Button>
               </div>
             </nav>
           )}
@@ -173,248 +255,466 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="hero-gradient text-white py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              Reduce Expenses. Accelerate Growth.
+      <section id="home" className="hero-section min-h-screen flex items-center justify-center text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        
+        {/* Floating elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-32 right-16 w-32 h-32 bg-accent/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-primary/20 rounded-full blur-lg animate-pulse" style={{ animationDelay: '4s' }}></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="opacity-0 animate-fade-in-up">
+              <Badge variant="secondary" className="mb-6 bg-white/10 text-white border-white/20 hover:bg-white/20">
+                <Sparkle className="w-3 h-3 mr-2" />
+                #1 Business Cost Reduction Platform
+              </Badge>
+            </div>
+            
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 opacity-0 animate-fade-in-up stagger-1">
+              <span className="block">Reduce Expenses.</span>
+              <span className="block gradient-text">Accelerate Growth.</span>
             </h2>
-            <p className="text-xl md:text-2xl mb-8 opacity-90">
-              We help businesses cut costs and reinvest savings into strategic growth services that drive real results.
+            
+            <p className="text-xl md:text-2xl lg:text-3xl mb-12 opacity-90 max-w-4xl mx-auto opacity-0 animate-fade-in-up stagger-2 leading-relaxed">
+              We help businesses <span className="font-semibold text-accent">cut operational costs</span> and reinvest those savings into 
+              <span className="font-semibold text-accent"> strategic growth initiatives</span> that drive real results.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto opacity-0 animate-fade-in-up stagger-3">
+              <div className="glass-card rounded-2xl p-6 text-center">
+                <div className="text-3xl font-bold text-accent mb-2">$620</div>
+                <div className="text-sm opacity-80">Avg. Savings Per Employee</div>
+              </div>
+              <div className="glass-card rounded-2xl p-6 text-center">
+                <div className="text-3xl font-bold text-accent mb-2">150+</div>
+                <div className="text-sm opacity-80">Businesses Helped</div>
+              </div>
+              <div className="glass-card rounded-2xl p-6 text-center">
+                <div className="text-3xl font-bold text-accent mb-2">$2.3M+</div>
+                <div className="text-sm opacity-80">Total Savings Generated</div>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 animate-fade-in-up stagger-4">
               <Button 
                 size="lg" 
-                variant="secondary"
+                className="bg-white text-primary hover:bg-white/90 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl"
                 onClick={() => scrollToSection('calculators')}
-                className="hover:scale-105 transition-transform"
               >
+                <Calculator className="mr-3 h-5 w-5" />
                 Calculate Your Savings
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
-                className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
+                className="border-2 border-white/30 text-white hover:bg-white/10 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm"
                 onClick={() => scrollToSection('contact')}
               >
+                <PlayCircle className="mr-3 h-5 w-5" />
                 Get Free Consultation
               </Button>
             </div>
+
+            <div className="mt-16 opacity-0 animate-fade-in-up stagger-5">
+              <p className="text-sm opacity-60 mb-4">Trusted by businesses across the nation</p>
+              <div className="flex justify-center items-center space-x-8 opacity-50">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-accent" />
+                  <span className="text-sm">Pennsylvania</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-accent" />
+                  <span className="text-sm">Maine</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-accent" />
+                  <span className="text-sm">Illinois</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-up stagger-6">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce"></div>
           </div>
         </div>
       </section>
 
       {/* Stats Counter Section */}
-      <section className="py-16 bg-muted">
+      <section className="py-24 bg-gradient-to-br from-muted/50 to-background section-bg-pattern">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-primary stats-counter mb-2">$2.3M+</div>
-              <p className="text-muted-foreground">Money Saved for Clients</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-primary stats-counter mb-2">150+</div>
-              <p className="text-muted-foreground">Businesses Helped</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-primary stats-counter mb-2">$620</div>
-              <p className="text-muted-foreground">Average Annual Savings Per Employee</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center max-w-5xl mx-auto">
+            {[
+              { 
+                value: '$2.3M+', 
+                label: 'Money Saved for Clients',
+                description: 'Total cost reductions achieved',
+                icon: CurrencyDollar,
+                gradient: 'from-green-500 to-emerald-600'
+              },
+              { 
+                value: '150+', 
+                label: 'Businesses Helped',
+                description: 'Companies we\'ve partnered with',
+                icon: Building,
+                gradient: 'from-blue-500 to-cyan-600'
+              },
+              { 
+                value: '$620', 
+                label: 'Average Annual Savings Per Employee',
+                description: 'Through our PCMP program',
+                icon: Heart,
+                gradient: 'from-purple-500 to-pink-600'
+              }
+            ].map((stat, index) => (
+              <div key={index} className="group">
+                <Card className="modern-card border-0 shadow-xl h-full bg-gradient-to-br from-white to-gray-50/50">
+                  <CardContent className="p-8 text-center">
+                    <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center`}>
+                      <stat.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <div className="text-4xl lg:text-5xl font-black stats-counter mb-3 group-hover:scale-110 transition-transform duration-300">
+                      {stat.value}
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">{stat.label}</h3>
+                    <p className="text-sm text-muted-foreground">{stat.description}</p>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">About Small Business Help Group</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Located in Sharon, PA, we specialize in helping businesses reduce operational expenses and reinvest those savings into strategic growth initiatives. Our comprehensive approach combines cost-cutting services with growth-focused solutions to maximize your business potential.
-            </p>
-            <p className="text-lg text-muted-foreground">
-              With additional locations serving Maine and Illinois for community solar programs, we're committed to delivering measurable results that impact your bottom line.
-            </p>
+      <section id="about" className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+            
+            {/* Content */}
+            <div className="space-y-8">
+              <div>
+                <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+                  <Handshake className="w-3 h-3 mr-2" />
+                  About Our Mission
+                </Badge>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                  Transforming Business 
+                  <span className="gradient-text block">Economics</span>
+                </h2>
+                <p className="text-xl text-muted-foreground leading-relaxed mb-6">
+                  Located in Sharon, PA, we specialize in helping businesses reduce operational expenses and reinvest those savings into strategic growth initiatives. Our comprehensive approach combines cost-cutting services with growth-focused solutions to maximize your business potential.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  With additional locations serving Maine and Illinois for community solar programs, we're committed to delivering measurable results that impact your bottom line.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <CheckCircle className="h-5 w-5 text-accent" />
+                    <span className="font-semibold">Cost Reduction Focus</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground pl-7">Identify and eliminate unnecessary expenses</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <CheckCircle className="h-5 w-5 text-accent" />
+                    <span className="font-semibold">Growth Investment</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground pl-7">Reinvest savings into strategic initiatives</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <CheckCircle className="h-5 w-5 text-accent" />
+                    <span className="font-semibold">Multi-State Coverage</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground pl-7">Serving PA, ME, and IL markets</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <CheckCircle className="h-5 w-5 text-accent" />
+                    <span className="font-semibold">Proven Results</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground pl-7">150+ successful partnerships</p>
+                </div>
+              </div>
+
+              <Button 
+                onClick={() => scrollToSection('services')}
+                className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift"
+                size="lg"
+              >
+                Explore Our Services
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+
+            {/* Image */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-xl"></div>
+              <div className="relative">
+                <img 
+                  src={businessTeamImage} 
+                  alt="Professional business team collaborating" 
+                  className="w-full h-96 object-cover rounded-3xl shadow-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-3xl"></div>
+                
+                {/* Floating stats */}
+                <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl max-w-xs">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                      <TrendUp className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-green-600">98%</div>
+                      <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-xl max-w-xs">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
+                      <Lightbulb className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-blue-600">5+</div>
+                      <div className="text-sm text-muted-foreground">Years Experience</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-muted">
+      <section id="services" className="py-32 bg-gradient-to-br from-muted/30 to-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
-            <p className="text-lg text-muted-foreground">Comprehensive solutions to reduce costs and accelerate growth</p>
+          <div className="text-center mb-20">
+            <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+              <Sparkle className="w-3 h-3 mr-2" />
+              Our Comprehensive Solutions
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="gradient-text">Reduce Costs.</span> Drive Growth.
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Comprehensive solutions to reduce operational costs and accelerate business growth through strategic reinvestment
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h3 className="text-2xl font-semibold mb-8 text-center">Cost Reduction Services</h3>
-              <div className="grid gap-6">
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Shield className="h-5 w-5 text-primary" />
-                      Preventative Care Management Program (PCMP)
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">
-                      Comprehensive healthcare program that saves employers an average of $620 per employee annually.
-                    </p>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span>Free telehealth consultations</span>
+          {/* Cost Reduction Services */}
+          <div className="mb-24">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3">
+                <Shield className="h-8 w-8 text-accent" />
+                Cost Reduction Services
+              </h3>
+              <p className="text-lg text-muted-foreground">Eliminate unnecessary expenses and optimize your operations</p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* PCMP - Hero Service */}
+              <Card className="modern-card lg:col-span-2 overflow-hidden bg-gradient-to-br from-white to-blue-50/50">
+                <div className="grid lg:grid-cols-2">
+                  <CardContent className="p-8 lg:p-12">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
+                        <Shield className="h-6 w-6 text-white" />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span>Free prescription medications</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span>24/7 mental health support</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span>Preventative care focus reduces long-term costs</span>
+                      <div>
+                        <CardTitle className="text-2xl">Preventative Care Management Program</CardTitle>
+                        <Badge variant="secondary" className="mt-1">Featured Service</Badge>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <CurrencyDollar className="h-5 w-5 text-primary" />
-                      Credit Card Processing
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Reduce payment processing fees with competitive rates and transparent pricing.
+                    <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                      Comprehensive healthcare program that saves employers an average of $620 per employee annually while providing superior care benefits.
                     </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                      {[
+                        { icon: Heart, text: 'Free telehealth consultations' },
+                        { icon: Shield, text: 'Free prescription medications' },
+                        { icon: Users, text: '24/7 mental health support' },
+                        { icon: TrendUp, text: 'Preventative care focus reduces long-term costs' }
+                      ].map((benefit, index) => (
+                        <div key={index} className="flex items-center gap-3">
+                          <benefit.icon className="h-5 w-5 text-accent flex-shrink-0" />
+                          <span className="text-sm">{benefit.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <Button className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-cyan-600 hover:to-blue-500 btn-hover-lift">
+                      Learn More About PCMP
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </CardContent>
-                </Card>
+                  <div className="relative lg:block hidden">
+                    <img 
+                      src={healthcareImage} 
+                      alt="Healthcare benefits illustration" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-l from-transparent to-white/50"></div>
+                  </div>
+                </div>
+              </Card>
 
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <TrendUp className="h-5 w-5 text-primary" />
-                      Community Solar Programs
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Save 5-20% on electricity costs through community solar subscriptions. Available in Maine and Illinois.
-                    </p>
+              {/* Other Cost Reduction Services */}
+              {[
+                {
+                  icon: CurrencyDollar,
+                  title: 'Credit Card Processing',
+                  description: 'Reduce payment processing fees with competitive rates and transparent pricing.',
+                  gradient: 'from-green-500 to-emerald-600'
+                },
+                {
+                  icon: TrendUp,
+                  title: 'Community Solar Programs',
+                  description: 'Save 5-20% on electricity costs through community solar subscriptions. Available in Maine and Illinois.',
+                  image: solarImage,
+                  gradient: 'from-yellow-500 to-orange-600'
+                },
+                {
+                  icon: Lightbulb,
+                  title: 'Deregulated Energy Supply',
+                  description: 'Access competitive energy rates in deregulated markets to reduce utility expenses.',
+                  gradient: 'from-purple-500 to-pink-600'
+                }
+              ].map((service, index) => (
+                <Card key={index} className="modern-card overflow-hidden group">
+                  {service.image && (
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={service.image} 
+                        alt={service.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  )}
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className={`w-10 h-10 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center`}>
+                        <service.icon className="h-5 w-5 text-white" />
+                      </div>
+                      <CardTitle className="text-lg">{service.title}</CardTitle>
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">{service.description}</p>
                   </CardContent>
                 </Card>
+              ))}
+            </div>
+          </div>
 
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <TrendUp className="h-5 w-5 text-primary" />
-                      Deregulated Energy Supply
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Access competitive energy rates in deregulated markets to reduce utility expenses.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+          {/* Growth Services */}
+          <div>
+            <div className="text-center mb-16">
+              <h3 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3">
+                <ChartLineUp className="h-8 w-8 text-accent" />
+                Growth Services
+              </h3>
+              <p className="text-lg text-muted-foreground">Reinvest your savings into strategic growth initiatives</p>
             </div>
 
-            <div>
-              <h3 className="text-2xl font-semibold mb-8 text-center">Growth Services</h3>
-              <div className="grid gap-6">
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Building className="h-5 w-5 text-primary" />
-                      Web Design & Development
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Professional website design and development to establish your online presence and drive conversions.
-                    </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  icon: Building,
+                  title: 'Web Design & Development',
+                  description: 'Professional website design and development to establish your online presence and drive conversions.',
+                  gradient: 'from-blue-500 to-cyan-600'
+                },
+                {
+                  icon: TrendUp,
+                  title: 'SEO Services',
+                  description: 'Improve your search engine rankings and drive organic traffic to grow your business online.',
+                  gradient: 'from-green-500 to-emerald-600'
+                },
+                {
+                  icon: Users,
+                  title: 'Social Media Marketing',
+                  description: 'Build brand awareness and engage customers through strategic social media campaigns.',
+                  gradient: 'from-purple-500 to-pink-600'
+                },
+                {
+                  icon: Phone,
+                  title: 'Call Center Services',
+                  description: 'Professional call center support to handle customer inquiries and drive sales.',
+                  gradient: 'from-orange-500 to-red-600'
+                }
+              ].map((service, index) => (
+                <Card key={index} className="modern-card group text-center">
+                  <CardContent className="p-6">
+                    <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <service.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <CardTitle className="text-lg mb-3">{service.title}</CardTitle>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
                   </CardContent>
                 </Card>
-
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <TrendUp className="h-5 w-5 text-primary" />
-                      SEO Services
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Improve your search engine rankings and drive organic traffic to grow your business online.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Users className="h-5 w-5 text-primary" />
-                      Social Media Marketing
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Build brand awareness and engage customers through strategic social media campaigns.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Phone className="h-5 w-5 text-primary" />
-                      Call Center Services
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Professional call center support to handle customer inquiries and drive sales.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+              ))}
             </div>
+          </div>
+
+          <div className="text-center mt-16">
+            <Button 
+              onClick={() => scrollToSection('calculators')}
+              size="lg"
+              className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift px-8"
+            >
+              See How Much You Can Save
+              <Calculator className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Calculators Section */}
-      <section id="calculators" className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Calculate Your Savings</h2>
-            <p className="text-lg text-muted-foreground">See how much you could save with our services</p>
+      <section id="calculators" className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-20">
+            <Badge variant="outline" className="mb-6 border-accent/20 text-accent">
+              <Calculator className="w-3 h-3 mr-2" />
+              Interactive Calculators
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Calculate Your <span className="gradient-text">Potential Savings</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Use our interactive calculators to see exactly how much you could save with our services
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 max-w-7xl mx-auto">
             {/* PCMP Calculator */}
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Calculator className="h-5 w-5 text-primary" />
-                  PCMP Savings Calculator
-                </CardTitle>
-                <CardDescription>
-                  Calculate potential savings with our Preventative Care Management Program
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
+            <Card className="modern-card border-0 bg-gradient-to-br from-white to-blue-50/50 overflow-hidden">
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-600 p-6 text-white">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    <Calculator className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl text-white">PCMP Savings Calculator</CardTitle>
+                    <p className="text-blue-100 text-sm">Healthcare cost reduction estimator</p>
+                  </div>
+                </div>
+              </div>
+              
+              <CardContent className="p-8 space-y-8">
                 <div>
-                  <Label className="text-sm font-medium">Number of Employees</Label>
-                  <div className="mt-2">
+                  <Label className="text-base font-semibold mb-3 block">Number of Employees</Label>
+                  <div className="space-y-4">
                     <Slider
                       value={pcmpEmployees}
                       onValueChange={setPcmpEmployees}
@@ -423,40 +723,67 @@ function App() {
                       step={1}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-sm text-muted-foreground mt-1">
-                      <span>1</span>
-                      <span className="font-medium">{pcmpEmployees[0]} employees</span>
-                      <span>500</span>
+                    <div className="flex justify-between text-sm text-muted-foreground">
+                      <span>1 employee</span>
+                      <span className="font-semibold text-lg text-foreground">{pcmpEmployees[0]} employees</span>
+                      <span>500 employees</span>
                     </div>
                   </div>
                 </div>
-                <div className="bg-accent/10 rounded-lg p-6 text-center">
-                  <div className="text-3xl font-bold text-accent mb-2">
+
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-8 text-center">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                      <CurrencyDollar className="h-5 w-5 text-white" />
+                    </div>
+                    <span className="text-sm font-medium text-green-700">Estimated Annual Savings</span>
+                  </div>
+                  <div className="text-4xl lg:text-5xl font-black text-green-600 mb-2">
                     ${pcmpSavings.toLocaleString()}
                   </div>
-                  <p className="text-sm text-muted-foreground">Annual Savings</p>
-                  <p className="text-xs text-muted-foreground mt-2">
+                  <p className="text-sm text-green-600/80 mb-4">
                     Based on $620 average savings per employee per year
                   </p>
+                  <div className="grid grid-cols-2 gap-4 text-xs text-green-600/70">
+                    <div>
+                      <div className="font-semibold">Monthly Savings</div>
+                      <div>${Math.round(pcmpSavings / 12).toLocaleString()}</div>
+                    </div>
+                    <div>
+                      <div className="font-semibold">5-Year Savings</div>
+                      <div>${(pcmpSavings * 5).toLocaleString()}</div>
+                    </div>
+                  </div>
                 </div>
+
+                <Button 
+                  onClick={() => scrollToSection('contact')}
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-cyan-600 hover:to-blue-500 btn-hover-lift text-lg py-6"
+                >
+                  Get PCMP Quote
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </CardContent>
             </Card>
 
             {/* Solar Calculator */}
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TrendUp className="h-5 w-5 text-primary" />
-                  Community Solar Calculator
-                </CardTitle>
-                <CardDescription>
-                  Estimate your savings with community solar programs
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
+            <Card className="modern-card border-0 bg-gradient-to-br from-white to-orange-50/50 overflow-hidden">
+              <div className="bg-gradient-to-r from-yellow-500 to-orange-600 p-6 text-white">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    <TrendUp className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl text-white">Community Solar Calculator</CardTitle>
+                    <p className="text-orange-100 text-sm">Electricity savings estimator</p>
+                  </div>
+                </div>
+              </div>
+              
+              <CardContent className="p-8 space-y-8">
                 <div>
-                  <Label className="text-sm font-medium">Monthly kWh Usage</Label>
-                  <div className="mt-2">
+                  <Label className="text-base font-semibold mb-3 block">Monthly kWh Usage</Label>
+                  <div className="space-y-4">
                     <Slider
                       value={solarUsage}
                       onValueChange={setSolarUsage}
@@ -465,16 +792,17 @@ function App() {
                       step={50}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-sm text-muted-foreground mt-1">
-                      <span>100</span>
-                      <span className="font-medium">{solarUsage[0]} kWh</span>
-                      <span>3000</span>
+                    <div className="flex justify-between text-sm text-muted-foreground">
+                      <span>100 kWh</span>
+                      <span className="font-semibold text-lg text-foreground">{solarUsage[0]} kWh</span>
+                      <span>3,000 kWh</span>
                     </div>
                   </div>
                 </div>
+
                 <div>
-                  <Label className="text-sm font-medium">Savings Percentage</Label>
-                  <div className="mt-2">
+                  <Label className="text-base font-semibold mb-3 block">Savings Percentage</Label>
+                  <div className="space-y-4">
                     <Slider
                       value={solarSavings}
                       onValueChange={setSolarSavings}
@@ -483,322 +811,660 @@ function App() {
                       step={1}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-sm text-muted-foreground mt-1">
+                    <div className="flex justify-between text-sm text-muted-foreground">
                       <span>5%</span>
-                      <span className="font-medium">{solarSavings[0]}%</span>
+                      <span className="font-semibold text-lg text-foreground">{solarSavings[0]}% savings</span>
                       <span>20%</span>
                     </div>
                   </div>
                 </div>
-                <div className="bg-accent/10 rounded-lg p-6 text-center">
-                  <div className="text-3xl font-bold text-accent mb-2">
+
+                <div className="bg-gradient-to-br from-orange-50 to-yellow-50 border border-orange-200 rounded-2xl p-8 text-center">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                      <TrendUp className="h-5 w-5 text-white" />
+                    </div>
+                    <span className="text-sm font-medium text-orange-700">Estimated Annual Savings</span>
+                  </div>
+                  <div className="text-4xl lg:text-5xl font-black text-orange-600 mb-2">
                     ${Math.round(annualSolarSavings).toLocaleString()}
                   </div>
-                  <p className="text-sm text-muted-foreground">Annual Savings</p>
-                  <p className="text-xs text-muted-foreground mt-2">
+                  <p className="text-sm text-orange-600/80 mb-4">
                     Available in Maine and Illinois
                   </p>
+                  <div className="grid grid-cols-2 gap-4 text-xs text-orange-600/70">
+                    <div>
+                      <div className="font-semibold">Monthly Savings</div>
+                      <div>${Math.round(annualSolarSavings / 12)}</div>
+                    </div>
+                    <div>
+                      <div className="font-semibold">10-Year Savings</div>
+                      <div>${(Math.round(annualSolarSavings) * 10).toLocaleString()}</div>
+                    </div>
+                  </div>
                 </div>
+
+                <Button 
+                  onClick={() => scrollToSection('contact')}
+                  className="w-full bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-orange-600 hover:to-yellow-500 btn-hover-lift text-lg py-6"
+                >
+                  Get Solar Quote
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </CardContent>
             </Card>
+          </div>
+
+          <div className="text-center mt-16">
+            <p className="text-lg text-muted-foreground mb-6">
+              Ready to start saving? Get a free consultation to explore all available options.
+            </p>
+            <Button 
+              onClick={() => scrollToSection('contact')}
+              size="lg"
+              variant="outline"
+              className="border-2 btn-hover-lift px-8"
+            >
+              Schedule Free Consultation
+              <Phone className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
-            <p className="text-lg text-muted-foreground">Real results from real businesses</p>
+      <section className="py-32 bg-gradient-to-br from-muted/30 to-background relative overflow-hidden">
+        <div className="absolute inset-0 section-bg-pattern"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-20">
+            <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+              <Star className="w-3 h-3 mr-2" />
+              Client Success Stories
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              What Our <span className="gradient-text">Clients Say</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Real results from real businesses who've transformed their operations with our help
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-accent text-accent" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  "The PCMP program has saved us over $15,000 annually while providing better healthcare options for our team. Incredible value!"
-                </p>
-                <div>
-                  <p className="font-semibold">Sarah Johnson</p>
-                  <p className="text-sm text-muted-foreground">CEO, TechStart Solutions</p>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {[
+              {
+                quote: "The PCMP program has saved us over $15,000 annually while providing better healthcare options for our team. The ROI was immediate and the service exceptional.",
+                author: "Sarah Johnson",
+                role: "CEO, TechStart Solutions",
+                rating: 5,
+                savings: "$15,000",
+                gradient: "from-blue-500 to-cyan-600",
+                image: "SJ"
+              },
+              {
+                quote: "Their community solar program cut our electricity costs by 18%. The savings go straight to our growth initiatives and marketing budget. Game changer!",
+                author: "Mike Rodriguez",
+                role: "Owner, Rodriguez Manufacturing",
+                rating: 5,
+                savings: "18%",
+                gradient: "from-green-500 to-emerald-600",
+                image: "MR"
+              },
+              {
+                quote: "The combination of cost savings and their marketing services has transformed our business. ROI was immediate and our online presence has never been stronger.",
+                author: "Lisa Chen",
+                role: "Founder, Green Valley Consulting",
+                rating: 5,
+                savings: "$8,500",
+                gradient: "from-purple-500 to-pink-600",
+                image: "LC"
+              }
+            ].map((testimonial, index) => (
+              <Card key={index} className="modern-card bg-white/80 backdrop-blur-sm border-0 overflow-hidden group">
+                <CardContent className="p-8">
+                  {/* Rating */}
+                  <div className="flex items-center mb-6">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
 
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-accent text-accent" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  "Their community solar program cut our electricity costs by 18%. The savings go straight to our growth initiatives."
-                </p>
-                <div>
-                  <p className="font-semibold">Mike Rodriguez</p>
-                  <p className="text-sm text-muted-foreground">Owner, Rodriguez Manufacturing</p>
-                </div>
-              </CardContent>
-            </Card>
+                  {/* Quote */}
+                  <blockquote className="text-lg text-foreground leading-relaxed mb-8 relative">
+                    <span className="text-5xl text-primary/20 absolute -top-2 -left-2">"</span>
+                    <span className="relative z-10">{testimonial.quote}</span>
+                  </blockquote>
 
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-accent text-accent" />
-                  ))}
+                  {/* Author */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.gradient} flex items-center justify-center text-white font-bold text-sm`}>
+                        {testimonial.image}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-foreground">{testimonial.author}</div>
+                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="text-right">
+                      <div className={`text-2xl font-bold bg-gradient-to-r ${testimonial.gradient} bg-clip-text text-transparent`}>
+                        {testimonial.savings}
+                      </div>
+                      <div className="text-xs text-muted-foreground">saved</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Trust indicators */}
+          <div className="mt-20 text-center">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+              {[
+                { metric: "150+", label: "Happy Clients" },
+                { metric: "98%", label: "Satisfaction Rate" },
+                { metric: "$2.3M+", label: "Total Savings" },
+                { metric: "5+", label: "Years Experience" }
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-3xl font-bold gradient-text mb-2">{stat.metric}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </div>
-                <p className="text-muted-foreground mb-4">
-                  "The combination of cost savings and their marketing services has transformed our business. ROI was immediate."
-                </p>
-                <div>
-                  <p className="font-semibold">Lisa Chen</p>
-                  <p className="text-sm text-muted-foreground">Founder, Green Valley Consulting</p>
-                </div>
-              </CardContent>
-            </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-muted-foreground">Get answers to common questions about our services</p>
+      <section id="faq" className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-20">
+            <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+              <Lightbulb className="w-3 h-3 mr-2" />
+              Frequently Asked Questions
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Get Your <span className="gradient-text">Questions Answered</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Everything you need to know about our services and how they can benefit your business
+            </p>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-8">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">What is the Preventative Care Management Program (PCMP)?</h3>
-                <p className="text-muted-foreground">
-                  PCMP is a comprehensive healthcare program designed to reduce healthcare costs for employers while providing superior care for employees. It includes free telehealth consultations, free prescription medications, 24/7 mental health support, and focuses on preventative care to catch health issues early and reduce long-term costs. The program saves employers an average of $620 per employee annually.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="max-w-4xl mx-auto grid gap-8">
+            {[
+              {
+                question: "What is the Preventative Care Management Program (PCMP)?",
+                answer: "PCMP is a comprehensive healthcare program designed to reduce healthcare costs for employers while providing superior care for employees. It includes free telehealth consultations, free prescription medications, 24/7 mental health support, and focuses on preventative care to catch health issues early and reduce long-term costs. The program saves employers an average of $620 per employee annually.",
+                icon: Shield,
+                gradient: "from-blue-500 to-cyan-600"
+              },
+              {
+                question: "How does community solar work?",
+                answer: "Community solar allows you to subscribe to a solar farm and receive credits on your electricity bill without installing panels on your property. You typically save 5-20% on your electricity costs. We currently offer community solar programs in Maine and Illinois.",
+                icon: TrendUp,
+                gradient: "from-green-500 to-emerald-600"
+              },
+              {
+                question: "What areas do you serve?",
+                answer: "We're headquartered in Sharon, PA and serve businesses nationwide for most services. Community solar programs are specifically available in Maine and Illinois due to state regulations.",
+                icon: MapPin,
+                gradient: "from-purple-500 to-pink-600"
+              },
+              {
+                question: "How quickly can I see savings?",
+                answer: "Savings timelines vary by service. PCMP savings begin within the first month of implementation. Community solar and energy supply savings start with your next billing cycle. Credit card processing savings are immediate.",
+                icon: ChartLineUp,
+                gradient: "from-orange-500 to-red-600"
+              }
+            ].map((faq, index) => (
+              <Card key={index} className="modern-card border-0 bg-white/80 backdrop-blur-sm group">
+                <CardContent className="p-8">
+                  <div className="flex items-start gap-6">
+                    <div className={`w-14 h-14 bg-gradient-to-br ${faq.gradient} rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                      <faq.icon className="h-7 w-7 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold mb-4 text-foreground">{faq.question}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
 
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">How does community solar work?</h3>
-                <p className="text-muted-foreground">
-                  Community solar allows you to subscribe to a solar farm and receive credits on your electricity bill without installing panels on your property. You typically save 5-20% on your electricity costs. We currently offer community solar programs in Maine and Illinois.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">What areas do you serve?</h3>
-                <p className="text-muted-foreground">
-                  We're headquartered in Sharon, PA and serve businesses nationwide for most services. Community solar programs are specifically available in Maine and Illinois due to state regulations.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">How quickly can I see savings?</h3>
-                <p className="text-muted-foreground">
-                  Savings timelines vary by service. PCMP savings begin within the first month of implementation. Community solar and energy supply savings start with your next billing cycle. Credit card processing savings are immediate.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="text-center mt-16">
+            <p className="text-lg text-muted-foreground mb-6">
+              Still have questions? We're here to help!
+            </p>
+            <Button 
+              onClick={() => scrollToSection('contact')}
+              size="lg"
+              className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift px-8"
+            >
+              Contact Our Experts
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Free eBook CTA */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <Download className="h-12 w-12 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Free Business Cost Reduction Guide
+      <section className="py-32 hero-section text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="w-20 h-20 mx-auto mb-8 bg-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm">
+              <Download className="h-10 w-10" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Get Your Free <span className="gradient-text">Cost Reduction Guide</span>
             </h2>
-            <p className="text-xl mb-8 opacity-90">
-              Download our comprehensive guide with 25 proven strategies to reduce business expenses and boost profitability.
+            <p className="text-xl mb-12 opacity-90 leading-relaxed">
+              Download our comprehensive guide with 25 proven strategies to reduce business expenses and boost profitability. 
+              Includes exclusive insights from our team of experts.
             </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={handleEbookSubmit}>
-              <Input 
-                type="email" 
-                name="email"
-                placeholder="Enter your email address" 
-                className="bg-white text-foreground flex-1"
-                required
-              />
-              <Button 
-                variant="secondary" 
-                type="submit" 
-                className="hover:scale-105 transition-transform"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Sending...' : 'Download Free Guide'}
-              </Button>
+            
+            <form className="glass-card rounded-2xl p-8 max-w-lg mx-auto mb-8" onSubmit={handleEbookSubmit}>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Input 
+                  type="email" 
+                  name="email"
+                  placeholder="Enter your email address" 
+                  className="bg-white/90 text-foreground flex-1 border-0 text-lg py-6"
+                  required
+                />
+                <Button 
+                  type="submit" 
+                  className="bg-gradient-to-r from-accent to-orange-500 hover:from-orange-500 hover:to-accent btn-hover-lift text-lg py-6 px-8"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Sending...
+                    </div>
+                  ) : (
+                    <>
+                      Download Guide
+                      <Download className="ml-2 h-5 w-5" />
+                    </>
+                  )}
+                </Button>
+              </div>
+              <div className="flex items-center gap-3 mt-6 text-sm">
+                <Checkbox name="ebook-consent" className="bg-white/90 border-white/30" required />
+                <span className="text-white/80">I consent to receive communications from Small Business Help Group and its affiliates</span>
+              </div>
             </form>
-            <div className="flex items-center justify-center gap-2 mt-4 text-sm opacity-75">
-              <Checkbox name="ebook-consent" className="bg-white" required />
-              <span>I consent to receive communications from Small Business Help Group and its affiliates</span>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <CheckCircle className="h-5 w-5 text-accent" />
+                <span className="text-sm opacity-80">25 Cost-Cutting Strategies</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <CheckCircle className="h-5 w-5 text-accent" />
+                <span className="text-sm opacity-80">Expert Insights</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <CheckCircle className="h-5 w-5 text-accent" />
+                <span className="text-sm opacity-80">Implementation Checklist</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
+      <section id="contact" className="py-32 bg-gradient-to-br from-muted/30 to-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Your Free Consultation</h2>
-            <p className="text-lg text-muted-foreground">Ready to start saving? Contact us today for a no-obligation consultation.</p>
+          <div className="text-center mb-20">
+            <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+              <Phone className="w-3 h-3 mr-2" />
+              Get In Touch
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Ready to <span className="gradient-text">Start Saving?</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Get your free consultation today and discover how much your business could save with our proven strategies
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-primary" />
-                    <span>(724) 418-2284</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <EnvelopeSimple className="h-5 w-5 text-primary" />
-                    <span>info@sbhelpgroup.com</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-primary" />
-                    <span>170 West State St, Sharon, PA 16146</span>
-                  </div>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            {/* Contact Info Cards */}
+            <div className="xl:col-span-1 space-y-6">
+              {[
+                {
+                  icon: Phone,
+                  title: "Call Us",
+                  content: "(724) 418-2284",
+                  subtitle: "Mon-Fri 8AM-6PM EST",
+                  gradient: "from-green-500 to-emerald-600"
+                },
+                {
+                  icon: EnvelopeSimple,
+                  title: "Email Us",
+                  content: "info@sbhelpgroup.com",
+                  subtitle: "24/7 response within 4 hours",
+                  gradient: "from-blue-500 to-cyan-600"
+                },
+                {
+                  icon: MapPin,
+                  title: "Visit Us",
+                  content: "170 West State St",
+                  subtitle: "Sharon, PA 16146",
+                  gradient: "from-purple-500 to-pink-600"
+                }
+              ].map((contact, index) => (
+                <Card key={index} className="modern-card border-0 group">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4">
+                      <div className={`w-12 h-12 bg-gradient-to-br ${contact.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <contact.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-foreground">{contact.title}</h3>
+                        <p className="text-foreground font-medium">{contact.content}</p>
+                        <p className="text-sm text-muted-foreground">{contact.subtitle}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
 
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
-                <div className="flex gap-4">
-                  <Button variant="outline" size="icon" className="hover:bg-primary hover:text-primary-foreground">
-                    <FacebookLogo className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" size="icon" className="hover:bg-primary hover:text-primary-foreground">
-                    <LinkedinLogo className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
+              {/* Social Media */}
+              <Card className="modern-card border-0">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+                  <div className="flex gap-3">
+                    <Button size="sm" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 btn-hover-lift">
+                      <FacebookLogo className="h-4 w-4 mr-2" />
+                      Facebook
+                    </Button>
+                    <Button size="sm" className="bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 btn-hover-lift">
+                      <LinkedinLogo className="h-4 w-4 mr-2" />
+                      LinkedIn
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Service Areas</h3>
-                <div className="space-y-2 text-muted-foreground">
-                  <p>• Nationwide for most services</p>
-                  <p>• Community Solar: Maine & Illinois</p>
-                  <p>• Headquarters: Sharon, PA</p>
-                </div>
-              </div>
+              {/* Service Areas */}
+              <Card className="modern-card border-0">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold mb-4">Service Areas</h3>
+                  <div className="space-y-3">
+                    {[
+                      { area: "Nationwide", services: "Most services available" },
+                      { area: "Maine & Illinois", services: "Community Solar programs" },
+                      { area: "Sharon, PA", services: "Headquarters & local services" }
+                    ].map((area, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
+                        <div>
+                          <div className="font-medium text-sm">{area.area}</div>
+                          <div className="text-xs text-muted-foreground">{area.services}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Contact Form */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Send Us a Message</CardTitle>
-                <CardDescription>Fill out the form below and we'll get back to you within 24 hours.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-6" onSubmit={handleContactSubmit}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="firstName">First Name *</Label>
-                      <Input id="firstName" name="firstName" required />
+            <div className="xl:col-span-2">
+              <Card className="modern-card border-0 bg-white/80 backdrop-blur-sm">
+                <CardHeader className="pb-8">
+                  <CardTitle className="text-2xl">Send Us a Message</CardTitle>
+                  <CardDescription className="text-lg">
+                    Fill out the form below and we'll get back to you within 24 hours with a customized savings analysis.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form className="space-y-6" onSubmit={handleContactSubmit}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="firstName" className="text-sm font-medium">First Name *</Label>
+                        <Input 
+                          id="firstName" 
+                          name="firstName" 
+                          className="h-12 border-2 focus:border-primary" 
+                          required 
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="lastName" className="text-sm font-medium">Last Name *</Label>
+                        <Input 
+                          id="lastName" 
+                          name="lastName" 
+                          className="h-12 border-2 focus:border-primary" 
+                          required 
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <Label htmlFor="lastName">Last Name *</Label>
-                      <Input id="lastName" name="lastName" required />
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-sm font-medium">Email Address *</Label>
+                      <Input 
+                        id="email" 
+                        name="email" 
+                        type="email" 
+                        className="h-12 border-2 focus:border-primary" 
+                        required 
+                      />
                     </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" name="email" type="email" required />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input id="phone" name="phone" type="tel" required />
-                  </div>
-                  <div>
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" name="message" rows={4} placeholder="Tell us about your business and how we can help..." />
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="consent" name="consent" required />
-                      <Label htmlFor="consent" className="text-sm">
-                        I consent to be contacted by Small Business Help Group and its affiliates *
-                      </Label>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-sm font-medium">Phone Number *</Label>
+                      <Input 
+                        id="phone" 
+                        name="phone" 
+                        type="tel" 
+                        className="h-12 border-2 focus:border-primary" 
+                        required 
+                      />
                     </div>
-                    <div style={{ display: 'none' }}>
-                      <Input name="honeypot" tabIndex={-1} autoComplete="off" />
+                    <div className="space-y-2">
+                      <Label htmlFor="message" className="text-sm font-medium">Message</Label>
+                      <Textarea 
+                        id="message" 
+                        name="message" 
+                        rows={4} 
+                        className="border-2 focus:border-primary resize-none" 
+                        placeholder="Tell us about your business, number of employees, and what services interest you most..."
+                      />
                     </div>
-                    <Button 
-                      type="submit" 
-                      className="w-full hover:scale-105 transition-transform"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? 'Sending...' : 'Send Message'}
-                    </Button>
-                  </div>
-                </form>
-              </CardContent>
-            </Card>
+                    
+                    <div className="space-y-6">
+                      <div className="flex items-start space-x-3">
+                        <Checkbox id="consent" name="consent" className="mt-1" required />
+                        <Label htmlFor="consent" className="text-sm leading-relaxed">
+                          I consent to be contacted by Small Business Help Group and its affiliates regarding their services and offers *
+                        </Label>
+                      </div>
+                      
+                      {/* Honeypot */}
+                      <div style={{ display: 'none' }}>
+                        <Input name="honeypot" tabIndex={-1} autoComplete="off" />
+                      </div>
+                      
+                      <Button 
+                        type="submit" 
+                        className="w-full h-14 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift text-lg font-semibold"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <div className="flex items-center gap-2">
+                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                            Sending Message...
+                          </div>
+                        ) : (
+                          <>
+                            Send Message & Get Free Analysis
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Quick Contact Options */}
+          <div className="mt-16 text-center">
+            <p className="text-lg text-muted-foreground mb-8">
+              Prefer to talk directly? We're here to help!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-emerald-600 hover:to-green-500 btn-hover-lift px-8"
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                Call (724) 418-2284
+              </Button>
+              <Button 
+                size="lg"
+                variant="outline"
+                className="border-2 btn-hover-lift px-8"
+              >
+                <EnvelopeSimple className="mr-2 h-5 w-5" />
+                Email Us
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-muted py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="font-bold text-lg mb-4">Small Business Help Group</h3>
-              <p className="text-sm text-muted-foreground">
-                Helping businesses reduce expenses and accelerate growth through strategic cost savings and growth services.
+      <footer className="bg-gradient-to-br from-muted/50 to-background border-t">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            {/* Company Info */}
+            <div className="lg:col-span-2 space-y-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                  <Sparkle className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl text-foreground">Small Business Help Group</h3>
+                  <p className="text-sm text-muted-foreground">Reduce. Grow. Succeed.</p>
+                </div>
+              </div>
+              <p className="text-muted-foreground leading-relaxed max-w-md">
+                Helping businesses reduce expenses and accelerate growth through strategic cost savings and growth services. 
+                Over $2.3M saved for 150+ satisfied clients.
               </p>
+              <div className="flex space-x-4">
+                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 btn-hover-lift">
+                  <FacebookLogo className="h-4 w-4 mr-2" />
+                  Facebook
+                </Button>
+                <Button size="sm" className="bg-blue-700 hover:bg-blue-800 btn-hover-lift">
+                  <LinkedinLogo className="h-4 w-4 mr-2" />
+                  LinkedIn
+                </Button>
+              </div>
             </div>
+
+            {/* Services */}
             <div>
-              <h4 className="font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>PCMP Program</li>
-                <li>Community Solar</li>
-                <li>Credit Card Processing</li>
-                <li>Energy Supply</li>
-                <li>Web Design</li>
-                <li>SEO Services</li>
+              <h4 className="font-semibold text-foreground mb-6">Cost Reduction</h4>
+              <ul className="space-y-3">
+                {[
+                  'PCMP Program',
+                  'Community Solar',
+                  'Credit Card Processing',
+                  'Energy Supply'
+                ].map((service, index) => (
+                  <li key={index}>
+                    <button className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      {service}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
+
+            {/* Growth Services */}
             <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><button onClick={() => scrollToSection('about')}>About Us</button></li>
-                <li><button onClick={() => setCurrentView('terms')} className="hover:text-foreground">Terms of Service</button></li>
-                <li><button onClick={() => setCurrentView('privacy')} className="hover:text-foreground">Privacy Policy</button></li>
-                <li><button onClick={() => scrollToSection('contact')}>Contact</button></li>
+              <h4 className="font-semibold text-foreground mb-6">Growth Services</h4>
+              <ul className="space-y-3">
+                {[
+                  'Web Design',
+                  'SEO Services',
+                  'Social Media Marketing',
+                  'Call Center Services'
+                ].map((service, index) => (
+                  <li key={index}>
+                    <button className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      {service}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
+
+            {/* Company & Contact */}
             <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <p>(724) 418-2284</p>
-                <p>info@sbhelpgroup.com</p>
-                <p>170 West State St<br />Sharon, PA 16146</p>
+              <h4 className="font-semibold text-foreground mb-6">Company</h4>
+              <ul className="space-y-3 mb-8">
+                {[
+                  { label: 'About Us', action: () => scrollToSection('about') },
+                  { label: 'Contact', action: () => scrollToSection('contact') },
+                  { label: 'Terms of Service', action: () => setCurrentView('terms') },
+                  { label: 'Privacy Policy', action: () => setCurrentView('privacy') }
+                ].map((item, index) => (
+                  <li key={index}>
+                    <button 
+                      onClick={item.action}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="space-y-3">
+                <h5 className="font-medium text-foreground text-sm">Quick Contact</h5>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-3 w-3 text-primary" />
+                    <span className="text-xs text-muted-foreground">(724) 418-2284</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <EnvelopeSimple className="h-3 w-3 text-primary" />
+                    <span className="text-xs text-muted-foreground">info@sbhelpgroup.com</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-3 w-3 text-primary" />
+                    <span className="text-xs text-muted-foreground">Sharon, PA</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 Small Business Help Group. All rights reserved.</p>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-border/50 mt-16 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-sm text-muted-foreground">
+                &copy; 2024 Small Business Help Group. All rights reserved.
+              </p>
+              <div className="flex items-center gap-6 text-xs text-muted-foreground">
+                <span>Made with ❤️ in Sharon, PA</span>
+                <span>•</span>
+                <span>Serving Nationwide</span>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
