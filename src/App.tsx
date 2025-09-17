@@ -149,14 +149,14 @@ function App() {
               <Button 
                 variant="outline"
                 size="sm"
-                className="border-white/30 text-white hover:bg-white/10"
+                className="border-white/40 text-white hover:bg-white/20 hover:border-white/60 font-medium"
                 onClick={() => setCurrentView('privacy')}
               >
                 Learn More
               </Button>
               <Button 
                 size="sm"
-                className="bg-white text-primary hover:bg-white/90 btn-hover-lift"
+                className="bg-white text-primary hover:bg-white/90 btn-hover-lift font-medium shadow-lg"
                 onClick={() => setShowCookieBanner(false)}
               >
                 Accept All
@@ -179,8 +179,8 @@ function App() {
                 <Sparkle className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Small Business Help Group</h1>
-                <p className="text-xs text-muted-foreground">Reduce. Grow. Succeed.</p>
+                <h1 className={`text-xl font-bold ${hasScrolled ? 'text-foreground' : 'text-white'} transition-colors duration-300`}>Small Business Help Group</h1>
+                <p className={`text-xs ${hasScrolled ? 'text-muted-foreground' : 'text-white/80'} transition-colors duration-300`}>Reduce. Grow. Succeed.</p>
               </div>
             </div>
             
@@ -197,7 +197,7 @@ function App() {
                 <button 
                   key={item.id}
                   onClick={() => scrollToSection(item.id)} 
-                  className="relative text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium group"
+                  className={`relative ${hasScrolled ? 'text-foreground/80 hover:text-foreground' : 'text-white/90 hover:text-white'} transition-colors duration-200 font-medium group`}
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 group-hover:w-full"></span>
@@ -205,7 +205,7 @@ function App() {
               ))}
               <Button 
                 onClick={() => scrollToSection('contact')}
-                className="btn-hover-lift bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary"
+                className="btn-hover-lift bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white"
               >
                 Get Started
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -214,7 +214,7 @@ function App() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+              className={`lg:hidden p-2 rounded-lg hover:bg-muted transition-colors ${hasScrolled ? 'text-foreground' : 'text-white'}`}
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
@@ -309,7 +309,7 @@ function App() {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm"
+                className="border-2 border-white/50 text-white hover:bg-white/20 hover:border-white/70 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm shadow-lg"
                 onClick={() => scrollToSection('contact')}
               >
                 <PlayCircle className="mr-3 h-5 w-5" />
