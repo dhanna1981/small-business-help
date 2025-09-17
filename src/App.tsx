@@ -149,14 +149,14 @@ function App() {
               <Button 
                 variant="outline"
                 size="sm"
-                className="border-white/40 text-white hover:bg-white/20 hover:border-white/60 font-medium"
+                className="border-white bg-white/20 text-white hover:bg-white hover:text-primary font-medium backdrop-blur-sm"
                 onClick={() => setCurrentView('privacy')}
               >
                 Learn More
               </Button>
               <Button 
                 size="sm"
-                className="bg-white text-primary hover:bg-white/90 btn-hover-lift font-medium shadow-lg"
+                className="bg-white text-primary hover:bg-gray-100 btn-hover-lift font-medium shadow-lg border border-white"
                 onClick={() => setShowCookieBanner(false)}
               >
                 Accept All
@@ -179,8 +179,8 @@ function App() {
                 <Sparkle className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h1 className={`text-xl font-bold ${hasScrolled ? 'text-foreground' : 'text-white'} transition-colors duration-300`}>Small Business Help Group</h1>
-                <p className={`text-xs ${hasScrolled ? 'text-muted-foreground' : 'text-white/80'} transition-colors duration-300`}>Reduce. Grow. Succeed.</p>
+                <h1 className={`text-xl font-bold transition-colors duration-300 ${hasScrolled ? 'text-foreground' : 'text-white drop-shadow-lg'}`}>Small Business Help Group</h1>
+                <p className={`text-xs transition-colors duration-300 ${hasScrolled ? 'text-muted-foreground' : 'text-white/90 drop-shadow-md'}`}>Reduce. Grow. Succeed.</p>
               </div>
             </div>
             
@@ -273,13 +273,13 @@ function App() {
             </div>
             
             <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 animate-fade-in-up stagger-1">
-              <span className="block text-white">Reduce Expenses.</span>
-              <span className="block gradient-text">Accelerate Growth.</span>
+              <span className="block text-white drop-shadow-lg">Reduce Expenses.</span>
+              <span className="block text-white drop-shadow-lg">Accelerate Growth.</span>
             </h2>
             
-            <p className="text-xl md:text-2xl lg:text-3xl mb-12 opacity-90 max-w-4xl mx-auto animate-fade-in-up stagger-2 leading-relaxed text-white">
-              We help businesses <span className="font-semibold text-accent">cut operational costs</span> and reinvest those savings into 
-              <span className="font-semibold text-accent"> strategic growth initiatives</span> that drive real results.
+            <p className="text-xl md:text-2xl lg:text-3xl mb-12 max-w-4xl mx-auto animate-fade-in-up stagger-2 leading-relaxed text-white drop-shadow-md">
+              We help businesses <span className="font-semibold text-white">cut operational costs</span> and reinvest those savings into 
+              <span className="font-semibold text-white"> strategic growth initiatives</span> that drive real results.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto animate-fade-in-up stagger-3">
@@ -300,7 +300,7 @@ function App() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up stagger-4">
               <Button 
                 size="lg" 
-                className="bg-white text-primary hover:bg-white/90 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl shadow-xl"
+                className="bg-white text-primary hover:bg-gray-100 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl shadow-xl border-2 border-white"
                 onClick={() => scrollToSection('calculators')}
               >
                 <Calculator className="mr-3 h-5 w-5" />
@@ -309,7 +309,7 @@ function App() {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white/20 hover:border-white btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm shadow-xl"
+                className="border-2 border-white bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl shadow-xl"
                 onClick={() => scrollToSection('contact')}
               >
                 <PlayCircle className="mr-3 h-5 w-5" />
