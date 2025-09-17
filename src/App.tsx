@@ -265,24 +265,24 @@ function App() {
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
           <div className="max-w-6xl mx-auto text-center">
-            <div className="opacity-0 animate-fade-in-up">
+            <div className="animate-fade-in-up">
               <Badge variant="secondary" className="mb-6 bg-white/10 text-white border-white/20 hover:bg-white/20">
                 <Sparkle className="w-3 h-3 mr-2" />
                 #1 Business Cost Reduction Platform
               </Badge>
             </div>
             
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 opacity-0 animate-fade-in-up stagger-1">
-              <span className="block">Reduce Expenses.</span>
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 animate-fade-in-up stagger-1">
+              <span className="block text-white">Reduce Expenses.</span>
               <span className="block gradient-text">Accelerate Growth.</span>
             </h2>
             
-            <p className="text-xl md:text-2xl lg:text-3xl mb-12 opacity-90 max-w-4xl mx-auto opacity-0 animate-fade-in-up stagger-2 leading-relaxed">
+            <p className="text-xl md:text-2xl lg:text-3xl mb-12 opacity-90 max-w-4xl mx-auto animate-fade-in-up stagger-2 leading-relaxed text-white">
               We help businesses <span className="font-semibold text-accent">cut operational costs</span> and reinvest those savings into 
               <span className="font-semibold text-accent"> strategic growth initiatives</span> that drive real results.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto opacity-0 animate-fade-in-up stagger-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto animate-fade-in-up stagger-3">
               <div className="glass-card rounded-2xl p-6 text-center border border-white/30 bg-white/10">
                 <div className="text-3xl font-bold text-white mb-2">$620</div>
                 <div className="text-sm text-white/90">Avg. Savings Per Employee</div>
@@ -297,10 +297,10 @@ function App() {
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 animate-fade-in-up stagger-4">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up stagger-4">
               <Button 
                 size="lg" 
-                className="bg-white text-primary hover:bg-white/90 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl"
+                className="bg-white text-primary hover:bg-white/90 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl shadow-xl"
                 onClick={() => scrollToSection('calculators')}
               >
                 <Calculator className="mr-3 h-5 w-5" />
@@ -309,7 +309,7 @@ function App() {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-2 border-white/50 text-white hover:bg-white/20 hover:border-white/70 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm shadow-lg"
+                className="border-2 border-white text-white hover:bg-white/20 hover:border-white btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm shadow-xl"
                 onClick={() => scrollToSection('contact')}
               >
                 <PlayCircle className="mr-3 h-5 w-5" />
@@ -317,20 +317,20 @@ function App() {
               </Button>
             </div>
 
-            <div className="mt-16 opacity-0 animate-fade-in-up stagger-5">
-              <p className="text-sm opacity-60 mb-4">Trusted by businesses across the nation</p>
+            <div className="mt-16 animate-fade-in-up stagger-5">
+              <p className="text-sm opacity-60 mb-4 text-white">Trusted by businesses across the nation</p>
               <div className="flex justify-center items-center space-x-8 opacity-50">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-sm">Pennsylvania</span>
+                  <span className="text-sm text-white">Pennsylvania</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-sm">Maine</span>
+                  <span className="text-sm text-white">Maine</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-sm">Illinois</span>
+                  <span className="text-sm text-white">Illinois</span>
                 </div>
               </div>
             </div>
@@ -338,7 +338,7 @@ function App() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-up stagger-6">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in-up stagger-6">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce"></div>
           </div>
