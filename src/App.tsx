@@ -466,54 +466,53 @@ function App() {
               </Badge>
             </div>
             
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 animate-fade-in-up stagger-1">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 animate-fade-in-up stagger-1">
               <span className="block text-white drop-shadow-lg">Reduce Expenses.</span>
               <span className="block text-white drop-shadow-lg">Accelerate Growth.</span>
             </h2>
             
-            <p className="text-xl md:text-2xl lg:text-3xl mb-12 max-w-4xl mx-auto animate-fade-in-up stagger-2 leading-relaxed text-white drop-shadow-md">
+            <p className="text-lg md:text-xl lg:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in-up stagger-2 leading-relaxed text-white drop-shadow-md">
               We help businesses <span className="font-semibold text-white">cut operational costs</span> and reinvest those savings into 
               <span className="font-semibold text-white"> strategic growth initiatives</span> that drive real results.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto animate-fade-in-up stagger-3">
-              <div className="glass-card rounded-2xl p-6 text-center border border-white/30 bg-white/10">
-                <div className="text-3xl font-bold text-white mb-2">$620</div>
-                <div className="text-sm text-white/90">Avg. Savings Per Employee</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto animate-fade-in-up stagger-3">
+              <div className="glass-card rounded-xl p-4 text-center border border-white/30 bg-white/10">
+                <div className="text-2xl font-bold text-white mb-1">$620</div>
+                <div className="text-xs text-white/90">Avg. Savings Per Employee</div>
               </div>
-              <div className="glass-card rounded-2xl p-6 text-center border border-white/30 bg-white/10">
-                <div className="text-3xl font-bold text-white mb-2">150+</div>
-                <div className="text-sm text-white/90">Businesses Helped</div>
+              <div className="glass-card rounded-xl p-4 text-center border border-white/30 bg-white/10">
+                <div className="text-2xl font-bold text-white mb-1">150+</div>
+                <div className="text-xs text-white/90">Businesses Helped</div>
               </div>
-              <div className="glass-card rounded-2xl p-6 text-center border border-white/30 bg-white/10">
-                <div className="text-3xl font-bold text-white mb-2">$2.3M+</div>
-                <div className="text-sm text-white/90">Total Savings Generated</div>
+              <div className="glass-card rounded-xl p-4 text-center border border-white/30 bg-white/10">
+                <div className="text-2xl font-bold text-white mb-1">$2.3M+</div>
+                <div className="text-xs text-white/90">Total Savings Generated</div>
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up stagger-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up stagger-4 mb-8">
               <Button 
                 size="lg" 
-                className="bg-white text-primary hover:bg-gray-100 btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl shadow-xl border-2 border-white"
+                className="bg-white text-primary hover:bg-gray-100 btn-hover-lift px-6 py-3 text-base font-semibold rounded-xl shadow-xl border-2 border-white"
                 onClick={() => scrollToSection('calculators')}
               >
-                <Calculator className="mr-3 h-5 w-5" />
+                <Calculator className="mr-2 h-4 w-4" />
                 Calculate Your Savings
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-2 border-white bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm btn-hover-lift px-8 py-4 text-lg font-semibold rounded-2xl shadow-xl"
+                className="border-2 border-white bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm btn-hover-lift px-6 py-3 text-base font-semibold rounded-xl shadow-xl"
                 onClick={() => scrollToSection('contact')}
               >
-                <PlayCircle className="mr-3 h-5 w-5" />
+                <PlayCircle className="mr-2 h-4 w-4" />
                 Get Free Consultation
               </Button>
             </div>
 
-            <div className="mt-16 animate-fade-in-up stagger-5">
-              <p className="text-sm opacity-60 mb-4 text-white">Trusted by businesses across the nation</p>
-              <div className="flex justify-center items-center space-x-8 opacity-50">
+            <div className="animate-fade-in-up stagger-5">
+              <div className="flex justify-center items-center space-x-6 opacity-70">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
                   <span className="text-sm text-white">Pennsylvania</span>
@@ -540,9 +539,9 @@ function App() {
       </section>
 
       {/* Stats Counter Section */}
-      <section className="py-24 bg-gradient-to-br from-muted/50 to-background section-bg-pattern">
+      <section className="py-16 bg-gradient-to-br from-muted/50 to-background section-bg-pattern">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-4xl mx-auto">
             {[
               { 
                 value: '$2.3M+', 
@@ -568,14 +567,14 @@ function App() {
             ].map((stat, index) => (
               <div key={index} className="group">
                 <Card className="modern-card border-0 shadow-xl h-full bg-gradient-to-br from-white to-gray-50/50">
-                  <CardContent className="p-8 text-center">
-                    <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center`}>
-                      <stat.icon className="h-8 w-8 text-white" />
+                  <CardContent className="p-6 text-center">
+                    <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center`}>
+                      <stat.icon className="h-6 w-6 text-white" />
                     </div>
-                    <div className="text-4xl lg:text-5xl font-black stats-counter mb-3 group-hover:scale-110 transition-transform duration-300">
+                    <div className="text-3xl font-black stats-counter mb-2 group-hover:scale-110 transition-transform duration-300">
                       {stat.value}
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">{stat.label}</h3>
+                    <h3 className="text-base font-semibold text-foreground mb-1">{stat.label}</h3>
                     <p className="text-sm text-muted-foreground">{stat.description}</p>
                   </CardContent>
                 </Card>
@@ -586,65 +585,64 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-32 relative overflow-hidden">
+      <section id="about" className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             
             {/* Content */}
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div>
-                <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+                <Badge variant="outline" className="mb-4 border-primary/20 text-primary">
                   <Handshake className="w-3 h-3 mr-2" />
                   About Our Mission
                 </Badge>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
                   Transforming Business 
                   <span className="gradient-text block">Economics</span>
                 </h2>
-                <p className="text-xl text-muted-foreground leading-relaxed mb-6">
-                  Located in Sharon, PA, we specialize in helping businesses reduce operational expenses and reinvest those savings into strategic growth initiatives. Our comprehensive approach combines cost-cutting services with growth-focused solutions to maximize your business potential.
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                  Located in Sharon, PA, we specialize in helping businesses reduce operational expenses and reinvest those savings into strategic growth initiatives.
                 </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  With additional locations serving Maine and Illinois for community solar programs, we're committed to delivering measurable results that impact your bottom line.
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  With additional locations serving Maine and Illinois for community solar programs, we're committed to delivering measurable results.
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
-                <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-5 w-5 text-accent" />
-                    <span className="font-semibold">Cost Reduction Focus</span>
+                    <CheckCircle className="h-4 w-4 text-accent" />
+                    <span className="font-semibold text-sm">Cost Reduction Focus</span>
                   </div>
-                  <p className="text-sm text-muted-foreground pl-7">Identify and eliminate unnecessary expenses</p>
+                  <p className="text-xs text-muted-foreground pl-6">Eliminate unnecessary expenses</p>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-5 w-5 text-accent" />
-                    <span className="font-semibold">Growth Investment</span>
+                    <CheckCircle className="h-4 w-4 text-accent" />
+                    <span className="font-semibold text-sm">Growth Investment</span>
                   </div>
-                  <p className="text-sm text-muted-foreground pl-7">Reinvest savings into strategic initiatives</p>
+                  <p className="text-xs text-muted-foreground pl-6">Reinvest savings strategically</p>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-5 w-5 text-accent" />
-                    <span className="font-semibold">Multi-State Coverage</span>
+                    <CheckCircle className="h-4 w-4 text-accent" />
+                    <span className="font-semibold text-sm">Multi-State Coverage</span>
                   </div>
-                  <p className="text-sm text-muted-foreground pl-7">Serving PA, ME, and IL markets</p>
+                  <p className="text-xs text-muted-foreground pl-6">Serving PA, ME, and IL</p>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-5 w-5 text-accent" />
-                    <span className="font-semibold">Proven Results</span>
+                    <CheckCircle className="h-4 w-4 text-accent" />
+                    <span className="font-semibold text-sm">Proven Results</span>
                   </div>
-                  <p className="text-sm text-muted-foreground pl-7">150+ successful partnerships</p>
+                  <p className="text-xs text-muted-foreground pl-6">150+ successful partnerships</p>
                 </div>
               </div>
 
               <Button 
                 onClick={() => scrollToSection('services')}
                 className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift"
-                size="lg"
               >
                 Explore Our Services
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -653,36 +651,36 @@ function App() {
 
             {/* Image */}
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl"></div>
               <div className="relative">
                 <img 
                   src={businessTeamImage} 
                   alt="Professional business team collaborating" 
-                  className="w-full h-96 object-cover rounded-3xl shadow-2xl"
+                  className="w-full h-80 object-cover rounded-2xl shadow-2xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-3xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
                 
                 {/* Floating stats */}
-                <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl max-w-xs">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
-                      <TrendUp className="h-6 w-6 text-white" />
+                <div className="absolute -bottom-4 -left-4 bg-white rounded-xl p-4 shadow-xl">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                      <TrendUp className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-green-600">98%</div>
-                      <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                      <div className="text-xl font-bold text-green-600">98%</div>
+                      <div className="text-xs text-muted-foreground">Client Satisfaction</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-xl max-w-xs">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
-                      <Lightbulb className="h-6 w-6 text-white" />
+                <div className="absolute -top-4 -right-4 bg-white rounded-xl p-4 shadow-xl">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center">
+                      <Lightbulb className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-blue-600">5+</div>
-                      <div className="text-sm text-muted-foreground">Years Experience</div>
+                      <div className="text-xl font-bold text-blue-600">5+</div>
+                      <div className="text-xs text-muted-foreground">Years Experience</div>
                     </div>
                   </div>
                 </div>
@@ -693,62 +691,61 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-32 bg-gradient-to-br from-muted/30 to-background">
+      <section id="services" className="py-20 bg-gradient-to-br from-muted/30 to-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4 border-primary/20 text-primary">
               <Sparkle className="w-3 h-3 mr-2" />
               Our Comprehensive Solutions
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               <span className="gradient-text">Reduce Costs.</span> Drive Growth.
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Comprehensive solutions to reduce operational costs and accelerate business growth through strategic reinvestment
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Comprehensive solutions to reduce operational costs and accelerate business growth
             </p>
           </div>
 
           {/* Cost Reduction Services */}
-          <div className="mb-24">
-            <div className="text-center mb-16">
-              <h3 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3">
-                <Shield className="h-8 w-8 text-accent" />
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+                <Shield className="h-6 w-6 text-accent" />
                 Cost Reduction Services
               </h3>
-              <p className="text-lg text-muted-foreground">Eliminate unnecessary expenses and optimize your operations</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* PCMP - Hero Service */}
-              <Card className="modern-card lg:col-span-2 overflow-hidden bg-gradient-to-br from-white to-blue-50/50">
+              <Card className="modern-card lg:col-span-3 overflow-hidden bg-gradient-to-br from-white to-blue-50/50">
                 <div className="grid lg:grid-cols-2">
-                  <CardContent className="p-8 lg:p-12">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
-                        <Shield className="h-6 w-6 text-white" />
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
+                        <Shield className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <CardTitle className="text-2xl">Preventative Care Management Program</CardTitle>
-                        <Badge variant="secondary" className="mt-1">Featured Service</Badge>
+                        <CardTitle className="text-lg">Preventative Care Management Program</CardTitle>
+                        <Badge variant="secondary" className="mt-1 text-xs">Featured Service</Badge>
                       </div>
                     </div>
-                    <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                    <p className="text-base text-muted-foreground mb-4 leading-relaxed">
                       Comprehensive healthcare program that saves employers an average of $620 per employee annually while providing superior care benefits.
                     </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                    <div className="grid grid-cols-2 gap-3 mb-4">
                       {[
-                        { icon: Heart, text: 'Free telehealth consultations' },
-                        { icon: Shield, text: 'Free prescription medications' },
-                        { icon: Users, text: '24/7 mental health support' },
-                        { icon: TrendUp, text: 'Preventative care focus reduces long-term costs' }
+                        { icon: Heart, text: 'Free telehealth' },
+                        { icon: Shield, text: 'Free prescriptions' },
+                        { icon: Users, text: '24/7 mental health' },
+                        { icon: TrendUp, text: 'Preventative care' }
                       ].map((benefit, index) => (
-                        <div key={index} className="flex items-center gap-3">
-                          <benefit.icon className="h-5 w-5 text-accent flex-shrink-0" />
+                        <div key={index} className="flex items-center gap-2">
+                          <benefit.icon className="h-4 w-4 text-accent flex-shrink-0" />
                           <span className="text-sm">{benefit.text}</span>
                         </div>
                       ))}
                     </div>
-                    <Button className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-cyan-600 hover:to-blue-500 btn-hover-lift">
+                    <Button className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-cyan-600 hover:to-blue-500 btn-hover-lift" size="sm">
                       Learn More About PCMP
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -764,46 +761,36 @@ function App() {
                 </div>
               </Card>
 
-              {/* Other Cost Reduction Services */}
+              {/* Other Services - Compact Grid */}
               {[
                 {
                   icon: CurrencyDollar,
                   title: 'Credit Card Processing',
-                  description: 'Reduce payment processing fees with competitive rates and transparent pricing.',
+                  description: 'Reduce payment processing fees with competitive rates.',
                   gradient: 'from-green-500 to-emerald-600'
                 },
                 {
                   icon: TrendUp,
-                  title: 'Community Solar Programs',
-                  description: 'Save 5-20% on electricity costs through community solar subscriptions. Available in Maine and Illinois.',
-                  image: solarImage,
+                  title: 'Community Solar',
+                  description: 'Save 5-20% on electricity through solar subscriptions.',
                   gradient: 'from-yellow-500 to-orange-600'
                 },
                 {
                   icon: Lightbulb,
-                  title: 'Deregulated Energy Supply',
-                  description: 'Access competitive energy rates in deregulated markets to reduce utility expenses.',
+                  title: 'Energy Supply',
+                  description: 'Access competitive energy rates in deregulated markets.',
                   gradient: 'from-purple-500 to-pink-600'
                 }
               ].map((service, index) => (
-                <Card key={index} className="modern-card overflow-hidden group">
-                  {service.image && (
-                    <div className="h-48 overflow-hidden">
-                      <img 
-                        src={service.image} 
-                        alt={service.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  )}
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-10 h-10 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center`}>
-                        <service.icon className="h-5 w-5 text-white" />
+                <Card key={index} className="modern-card group">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-8 h-8 bg-gradient-to-br ${service.gradient} rounded-lg flex items-center justify-center`}>
+                        <service.icon className="h-4 w-4 text-white" />
                       </div>
-                      <CardTitle className="text-lg">{service.title}</CardTitle>
+                      <CardTitle className="text-base">{service.title}</CardTitle>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -812,47 +799,46 @@ function App() {
 
           {/* Growth Services */}
           <div>
-            <div className="text-center mb-16">
-              <h3 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3">
-                <ChartLineUp className="h-8 w-8 text-accent" />
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+                <ChartLineUp className="h-6 w-6 text-accent" />
                 Growth Services
               </h3>
-              <p className="text-lg text-muted-foreground">Reinvest your savings into strategic growth initiatives</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 {
                   icon: Building,
-                  title: 'Web Design & Development',
-                  description: 'Professional website design and development to establish your online presence and drive conversions.',
+                  title: 'Web Design',
+                  description: 'Professional website design and development.',
                   gradient: 'from-blue-500 to-cyan-600'
                 },
                 {
                   icon: TrendUp,
                   title: 'SEO Services',
-                  description: 'Improve your search engine rankings and drive organic traffic to grow your business online.',
+                  description: 'Improve search rankings and drive traffic.',
                   gradient: 'from-green-500 to-emerald-600'
                 },
                 {
                   icon: Users,
-                  title: 'Social Media Marketing',
-                  description: 'Build brand awareness and engage customers through strategic social media campaigns.',
+                  title: 'Social Media',
+                  description: 'Strategic social media campaigns.',
                   gradient: 'from-purple-500 to-pink-600'
                 },
                 {
                   icon: Phone,
-                  title: 'Call Center Services',
-                  description: 'Professional call center support to handle customer inquiries and drive sales.',
+                  title: 'Call Center',
+                  description: 'Professional customer support.',
                   gradient: 'from-orange-500 to-red-600'
                 }
               ].map((service, index) => (
                 <Card key={index} className="modern-card group text-center">
-                  <CardContent className="p-6">
-                    <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                      <service.icon className="h-8 w-8 text-white" />
+                  <CardContent className="p-4">
+                    <div className={`w-12 h-12 mx-auto mb-3 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <service.icon className="h-6 w-6 text-white" />
                     </div>
-                    <CardTitle className="text-lg mb-3">{service.title}</CardTitle>
+                    <CardTitle className="text-base mb-2">{service.title}</CardTitle>
                     <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
                   </CardContent>
                 </Card>
@@ -860,55 +846,54 @@ function App() {
             </div>
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-12">
             <Button 
               onClick={() => scrollToSection('calculators')}
-              size="lg"
-              className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift px-8"
+              className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift px-6"
             >
               See How Much You Can Save
-              <Calculator className="ml-2 h-5 w-5" />
+              <Calculator className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
 
       {/* Calculators Section */}
-      <section id="calculators" className="py-32 relative overflow-hidden">
+      <section id="calculators" className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-20">
-            <Badge variant="outline" className="mb-6 border-accent/20 text-accent">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4 border-accent/20 text-accent">
               <Calculator className="w-3 h-3 mr-2" />
               Interactive Calculators
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Calculate Your <span className="gradient-text">Potential Savings</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Use our interactive calculators to see exactly how much you could save with our services
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Use our interactive calculators to see exactly how much you could save
             </p>
           </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* PCMP Calculator */}
             <Card className="modern-card border-0 bg-gradient-to-br from-white to-blue-50/50 overflow-hidden">
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-600 p-6 text-white">
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-600 p-4 text-white">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                    <Calculator className="h-6 w-6" />
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                    <Calculator className="h-5 w-5" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl text-white">PCMP Savings Calculator</CardTitle>
+                    <CardTitle className="text-lg text-white">PCMP Savings Calculator</CardTitle>
                     <p className="text-blue-100 text-sm">Healthcare cost reduction estimator</p>
                   </div>
                 </div>
               </div>
               
-              <CardContent className="p-8 space-y-8">
+              <CardContent className="p-6 space-y-6">
                 <div>
                   <Label className="text-base font-semibold mb-3 block">Number of Employees</Label>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <Slider
                       value={pcmpEmployees}
                       onValueChange={setPcmpEmployees}
@@ -919,26 +904,26 @@ function App() {
                     />
                     <div className="flex justify-between text-sm text-muted-foreground">
                       <span>1 employee</span>
-                      <span className="font-semibold text-lg text-foreground">{pcmpEmployees[0]} employees</span>
+                      <span className="font-semibold text-base text-foreground">{pcmpEmployees[0]} employees</span>
                       <span>500 employees</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-8 text-center">
-                  <div className="flex items-center justify-center gap-2 mb-4">
-                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                      <CurrencyDollar className="h-5 w-5 text-white" />
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6 text-center">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <CurrencyDollar className="h-4 w-4 text-white" />
                     </div>
                     <span className="text-sm font-medium text-green-700">Estimated Annual Savings</span>
                   </div>
-                  <div className="text-4xl lg:text-5xl font-black text-green-600 mb-2">
+                  <div className="text-3xl font-black text-green-600 mb-2">
                     ${pcmpSavings.toLocaleString()}
                   </div>
-                  <p className="text-sm text-green-600/80 mb-4">
+                  <p className="text-sm text-green-600/80 mb-3">
                     Based on $620 average savings per employee per year
                   </p>
-                  <div className="grid grid-cols-2 gap-4 text-xs text-green-600/70">
+                  <div className="grid grid-cols-2 gap-3 text-xs text-green-600/70">
                     <div>
                       <div className="font-semibold">Monthly Savings</div>
                       <div>${Math.round(pcmpSavings / 12).toLocaleString()}</div>
@@ -952,32 +937,32 @@ function App() {
 
                 <Button 
                   onClick={() => scrollToSection('contact')}
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-cyan-600 hover:to-blue-500 btn-hover-lift text-lg py-6"
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-cyan-600 hover:to-blue-500 btn-hover-lift"
                 >
                   Get PCMP Quote
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </CardContent>
             </Card>
 
             {/* Solar Calculator */}
             <Card className="modern-card border-0 bg-gradient-to-br from-white to-orange-50/50 overflow-hidden">
-              <div className="bg-gradient-to-r from-yellow-500 to-orange-600 p-6 text-white">
+              <div className="bg-gradient-to-r from-yellow-500 to-orange-600 p-4 text-white">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                    <TrendUp className="h-6 w-6" />
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                    <TrendUp className="h-5 w-5" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl text-white">Community Solar Calculator</CardTitle>
+                    <CardTitle className="text-lg text-white">Community Solar Calculator</CardTitle>
                     <p className="text-orange-100 text-sm">Electricity savings estimator</p>
                   </div>
                 </div>
               </div>
               
-              <CardContent className="p-8 space-y-8">
+              <CardContent className="p-6 space-y-6">
                 <div>
                   <Label className="text-base font-semibold mb-3 block">Monthly kWh Usage</Label>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <Slider
                       value={solarUsage}
                       onValueChange={setSolarUsage}
@@ -988,7 +973,7 @@ function App() {
                     />
                     <div className="flex justify-between text-sm text-muted-foreground">
                       <span>100 kWh</span>
-                      <span className="font-semibold text-lg text-foreground">{solarUsage[0]} kWh</span>
+                      <span className="font-semibold text-base text-foreground">{solarUsage[0]} kWh</span>
                       <span>3,000 kWh</span>
                     </div>
                   </div>
@@ -996,7 +981,7 @@ function App() {
 
                 <div>
                   <Label className="text-base font-semibold mb-3 block">Savings Percentage</Label>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <Slider
                       value={solarSavings}
                       onValueChange={setSolarSavings}
@@ -1007,26 +992,26 @@ function App() {
                     />
                     <div className="flex justify-between text-sm text-muted-foreground">
                       <span>5%</span>
-                      <span className="font-semibold text-lg text-foreground">{solarSavings[0]}% savings</span>
+                      <span className="font-semibold text-base text-foreground">{solarSavings[0]}% savings</span>
                       <span>20%</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-orange-50 to-yellow-50 border border-orange-200 rounded-2xl p-8 text-center">
-                  <div className="flex items-center justify-center gap-2 mb-4">
-                    <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                      <TrendUp className="h-5 w-5 text-white" />
+                <div className="bg-gradient-to-br from-orange-50 to-yellow-50 border border-orange-200 rounded-xl p-6 text-center">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+                      <TrendUp className="h-4 w-4 text-white" />
                     </div>
                     <span className="text-sm font-medium text-orange-700">Estimated Annual Savings</span>
                   </div>
-                  <div className="text-4xl lg:text-5xl font-black text-orange-600 mb-2">
+                  <div className="text-3xl font-black text-orange-600 mb-2">
                     ${Math.round(annualSolarSavings).toLocaleString()}
                   </div>
-                  <p className="text-sm text-orange-600/80 mb-4">
+                  <p className="text-sm text-orange-600/80 mb-3">
                     Available in Maine and Illinois
                   </p>
-                  <div className="grid grid-cols-2 gap-4 text-xs text-orange-600/70">
+                  <div className="grid grid-cols-2 gap-3 text-xs text-orange-600/70">
                     <div>
                       <div className="font-semibold">Monthly Savings</div>
                       <div>${Math.round(annualSolarSavings / 12)}</div>
@@ -1040,53 +1025,52 @@ function App() {
 
                 <Button 
                   onClick={() => scrollToSection('contact')}
-                  className="w-full bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-orange-600 hover:to-yellow-500 btn-hover-lift text-lg py-6"
+                  className="w-full bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-orange-600 hover:to-yellow-500 btn-hover-lift"
                 >
                   Get Solar Quote
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </CardContent>
             </Card>
           </div>
 
-          <div className="text-center mt-16">
-            <p className="text-lg text-muted-foreground mb-6">
+          <div className="text-center mt-12">
+            <p className="text-base text-muted-foreground mb-4">
               Ready to start saving? Get a free consultation to explore all available options.
             </p>
             <Button 
               onClick={() => scrollToSection('contact')}
-              size="lg"
               variant="outline"
-              className="border-2 btn-hover-lift px-8"
+              className="border-2 btn-hover-lift px-6"
             >
               Schedule Free Consultation
-              <Phone className="ml-2 h-5 w-5" />
+              <Phone className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 bg-gradient-to-br from-muted/30 to-background relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-muted/30 to-background relative overflow-hidden">
         <div className="absolute inset-0 section-bg-pattern"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-20">
-            <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4 border-primary/20 text-primary">
               <Star className="w-3 h-3 mr-2" />
               Client Success Stories
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               What Our <span className="gradient-text">Clients Say</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Real results from real businesses who've transformed their operations with our help
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Real results from real businesses who've transformed their operations
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               {
-                quote: "The PCMP program has saved us over $15,000 annually while providing better healthcare options for our team. The ROI was immediate and the service exceptional.",
+                quote: "The PCMP program has saved us over $15,000 annually while providing better healthcare options for our team. The ROI was immediate.",
                 author: "Sarah Johnson",
                 role: "CEO, TechStart Solutions",
                 rating: 5,
@@ -1095,7 +1079,7 @@ function App() {
                 image: "SJ"
               },
               {
-                quote: "Their community solar program cut our electricity costs by 18%. The savings go straight to our growth initiatives and marketing budget. Game changer!",
+                quote: "Their community solar program cut our electricity costs by 18%. The savings go straight to our growth initiatives and marketing budget.",
                 author: "Mike Rodriguez",
                 role: "Owner, Rodriguez Manufacturing",
                 rating: 5,
@@ -1104,7 +1088,7 @@ function App() {
                 image: "MR"
               },
               {
-                quote: "The combination of cost savings and their marketing services has transformed our business. ROI was immediate and our online presence has never been stronger.",
+                quote: "The combination of cost savings and their marketing services has transformed our business. ROI was immediate and online presence stronger.",
                 author: "Lisa Chen",
                 role: "Founder, Green Valley Consulting",
                 rating: 5,
@@ -1114,34 +1098,34 @@ function App() {
               }
             ].map((testimonial, index) => (
               <Card key={index} className="modern-card bg-white/80 backdrop-blur-sm border-0 overflow-hidden group">
-                <CardContent className="p-8">
+                <CardContent className="p-6">
                   {/* Rating */}
-                  <div className="flex items-center mb-6">
+                  <div className="flex items-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
 
                   {/* Quote */}
-                  <blockquote className="text-lg text-foreground leading-relaxed mb-8 relative">
-                    <span className="text-5xl text-primary/20 absolute -top-2 -left-2">"</span>
+                  <blockquote className="text-base text-foreground leading-relaxed mb-6 relative">
+                    <span className="text-4xl text-primary/20 absolute -top-2 -left-2">"</span>
                     <span className="relative z-10">{testimonial.quote}</span>
                   </blockquote>
 
                   {/* Author */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.gradient} flex items-center justify-center text-white font-bold text-sm`}>
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${testimonial.gradient} flex items-center justify-center text-white font-bold text-sm`}>
                         {testimonial.image}
                       </div>
                       <div>
-                        <div className="font-semibold text-foreground">{testimonial.author}</div>
-                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                        <div className="font-semibold text-foreground text-sm">{testimonial.author}</div>
+                        <div className="text-xs text-muted-foreground">{testimonial.role}</div>
                       </div>
                     </div>
                     
                     <div className="text-right">
-                      <div className={`text-2xl font-bold bg-gradient-to-r ${testimonial.gradient} bg-clip-text text-transparent`}>
+                      <div className={`text-xl font-bold bg-gradient-to-r ${testimonial.gradient} bg-clip-text text-transparent`}>
                         {testimonial.savings}
                       </div>
                       <div className="text-xs text-muted-foreground">saved</div>
@@ -1153,8 +1137,8 @@ function App() {
           </div>
 
           {/* Trust indicators */}
-          <div className="mt-20 text-center">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          <div className="mt-16 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
               {[
                 { metric: "150+", label: "Happy Clients" },
                 { metric: "98%", label: "Satisfaction Rate" },
@@ -1162,7 +1146,7 @@ function App() {
                 { metric: "5+", label: "Years Experience" }
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-3xl font-bold gradient-text mb-2">{stat.metric}</div>
+                  <div className="text-2xl font-bold gradient-text mb-1">{stat.metric}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
@@ -1172,23 +1156,23 @@ function App() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-32 relative overflow-hidden">
+      <section id="faq" className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-20">
-            <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4 border-primary/20 text-primary">
               <Lightbulb className="w-3 h-3 mr-2" />
               Frequently Asked Questions
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Get Your <span className="gradient-text">Questions Answered</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Everything you need to know about our services and how they can benefit your business
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto grid gap-8">
+          <div className="max-w-4xl mx-auto grid gap-6">
             {[
               {
                 question: "What is the Preventative Care Management Program (PCMP)?",
@@ -1216,13 +1200,13 @@ function App() {
               }
             ].map((faq, index) => (
               <Card key={index} className="modern-card border-0 bg-white/80 backdrop-blur-sm group">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-6">
-                    <div className={`w-14 h-14 bg-gradient-to-br ${faq.gradient} rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                      <faq.icon className="h-7 w-7 text-white" />
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div className={`w-12 h-12 bg-gradient-to-br ${faq.gradient} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                      <faq.icon className="h-6 w-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold mb-4 text-foreground">{faq.question}</h3>
+                      <h3 className="text-lg font-semibold mb-3 text-foreground">{faq.question}</h3>
                       <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
                     </div>
                   </div>
@@ -1231,24 +1215,23 @@ function App() {
             ))}
           </div>
 
-          <div className="text-center mt-16">
-            <p className="text-lg text-muted-foreground mb-6">
+          <div className="text-center mt-12">
+            <p className="text-base text-muted-foreground mb-4">
               Still have questions? We're here to help!
             </p>
             <Button 
               onClick={() => scrollToSection('contact')}
-              size="lg"
-              className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift px-8"
+              className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift px-6"
             >
               Contact Our Experts
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
 
       {/* Free eBook CTA */}
-      <section className="py-32 text-white relative overflow-hidden" style={{
+      <section className="py-20 text-white relative overflow-hidden" style={{
         backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -1257,29 +1240,29 @@ function App() {
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="w-20 h-20 mx-auto mb-8 bg-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm">
-              <Download className="h-10 w-10" />
+            <div className="w-16 h-16 mx-auto mb-6 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <Download className="h-8 w-8" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Get Your Free <span className="gradient-text">Cost Reduction Guide</span>
             </h2>
-            <p className="text-xl mb-12 opacity-90 leading-relaxed">
+            <p className="text-lg mb-8 opacity-90 leading-relaxed">
               Download our comprehensive guide with 25 proven strategies to reduce business expenses and boost profitability. 
               Includes exclusive insights from our team of experts.
             </p>
             
-            <form className="glass-card rounded-2xl p-8 max-w-lg mx-auto mb-8" onSubmit={handleEbookSubmit}>
+            <form className="glass-card rounded-xl p-6 max-w-lg mx-auto mb-6" onSubmit={handleEbookSubmit}>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Input 
                   type="email" 
                   name="email"
                   placeholder="Enter your email address" 
-                  className="bg-white/90 text-foreground flex-1 border-0 text-lg py-6"
+                  className="bg-white/90 text-foreground flex-1 border-0 py-3"
                   required
                 />
                 <Button 
                   type="submit" 
-                  className="bg-gradient-to-r from-accent to-orange-500 hover:from-orange-500 hover:to-accent btn-hover-lift text-lg py-6 px-8"
+                  className="bg-gradient-to-r from-accent to-orange-500 hover:from-orange-500 hover:to-accent btn-hover-lift py-3 px-6"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -1290,12 +1273,12 @@ function App() {
                   ) : (
                     <>
                       Download Guide
-                      <Download className="ml-2 h-5 w-5" />
+                      <Download className="ml-2 h-4 w-4" />
                     </>
                   )}
                 </Button>
               </div>
-              <div className="flex items-center gap-3 mt-6 text-sm">
+              <div className="flex items-center gap-3 mt-4 text-sm">
                 <Checkbox name="ebook-consent" className="bg-white/90 border-white/30" required />
                 <span className="text-white/80">I consent to receive communications from Small Business Help Group and its affiliates</span>
               </div>
@@ -1303,15 +1286,15 @@ function App() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
               <div className="flex items-center justify-center gap-2">
-                <CheckCircle className="h-5 w-5 text-accent" />
+                <CheckCircle className="h-4 w-4 text-accent" />
                 <span className="text-sm opacity-80">25 Cost-Cutting Strategies</span>
               </div>
               <div className="flex items-center justify-center gap-2">
-                <CheckCircle className="h-5 w-5 text-accent" />
+                <CheckCircle className="h-4 w-4 text-accent" />
                 <span className="text-sm opacity-80">Expert Insights</span>
               </div>
               <div className="flex items-center justify-center gap-2">
-                <CheckCircle className="h-5 w-5 text-accent" />
+                <CheckCircle className="h-4 w-4 text-accent" />
                 <span className="text-sm opacity-80">Implementation Checklist</span>
               </div>
             </div>
@@ -1320,24 +1303,24 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 bg-gradient-to-br from-muted/30 to-background">
+      <section id="contact" className="py-20 bg-gradient-to-br from-muted/30 to-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <Badge variant="outline" className="mb-6 border-primary/20 text-primary">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4 border-primary/20 text-primary">
               <Phone className="w-3 h-3 mr-2" />
               Get In Touch
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Ready to <span className="gradient-text">Start Saving?</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Get your free consultation today and discover how much your business could save with our proven strategies
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Get your free consultation today and discover how much your business could save
             </p>
           </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Contact Info Cards */}
-            <div className="xl:col-span-1 space-y-6">
+            <div className="xl:col-span-1 space-y-4">
               {[
                 {
                   icon: Phone,
@@ -1362,15 +1345,15 @@ function App() {
                 }
               ].map((contact, index) => (
                 <Card key={index} className="modern-card border-0 group">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${contact.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                        <contact.icon className="h-6 w-6 text-white" />
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-10 h-10 bg-gradient-to-br ${contact.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <contact.icon className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-foreground">{contact.title}</h3>
-                        <p className="text-foreground font-medium">{contact.content}</p>
-                        <p className="text-sm text-muted-foreground">{contact.subtitle}</p>
+                        <h3 className="font-semibold text-foreground text-sm">{contact.title}</h3>
+                        <p className="text-foreground font-medium text-sm">{contact.content}</p>
+                        <p className="text-xs text-muted-foreground">{contact.subtitle}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -1379,42 +1362,40 @@ function App() {
 
               {/* Social Media */}
               <Card className="modern-card border-0">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-                  <div className="flex gap-3">
-                    <Button size="sm" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 btn-hover-lift">
-                      <FacebookLogo className="h-4 w-4 mr-2" />
+                <CardContent className="p-4">
+                  <h3 className="text-base font-semibold mb-3">Follow Us</h3>
+                  <div className="flex gap-2">
+                    <Button size="sm" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 btn-hover-lift text-xs">
+                      <FacebookLogo className="h-3 w-3 mr-1" />
                       Facebook
                     </Button>
-                    <Button size="sm" className="bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 btn-hover-lift">
-                      <LinkedinLogo className="h-4 w-4 mr-2" />
+                    <Button size="sm" className="bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 btn-hover-lift text-xs">
+                      <LinkedinLogo className="h-3 w-3 mr-1" />
                       LinkedIn
                     </Button>
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Service Areas */}
             </div>
 
             {/* Contact Form */}
             <div className="xl:col-span-2">
               <Card className="modern-card border-0 bg-white/80 backdrop-blur-sm">
-                <CardHeader className="pb-8">
-                  <CardTitle className="text-2xl">Send Us a Message</CardTitle>
-                  <CardDescription className="text-lg">
+                <CardHeader className="pb-6">
+                  <CardTitle className="text-xl">Send Us a Message</CardTitle>
+                  <CardDescription className="text-base">
                     Fill out the form below and we'll get back to you within 24 hours with a customized savings analysis.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form className="space-y-6" onSubmit={handleContactSubmit}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <form className="space-y-4" onSubmit={handleContactSubmit}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="firstName" className="text-sm font-medium">First Name *</Label>
                         <Input 
                           id="firstName" 
                           name="firstName" 
-                          className="h-12 border-2 focus:border-primary" 
+                          className="h-10 border-2 focus:border-primary" 
                           required 
                         />
                       </div>
@@ -1423,7 +1404,7 @@ function App() {
                         <Input 
                           id="lastName" 
                           name="lastName" 
-                          className="h-12 border-2 focus:border-primary" 
+                          className="h-10 border-2 focus:border-primary" 
                           required 
                         />
                       </div>
@@ -1434,7 +1415,7 @@ function App() {
                         id="email" 
                         name="email" 
                         type="email" 
-                        className="h-12 border-2 focus:border-primary" 
+                        className="h-10 border-2 focus:border-primary" 
                         required 
                       />
                     </div>
@@ -1444,7 +1425,7 @@ function App() {
                         id="phone" 
                         name="phone" 
                         type="tel" 
-                        className="h-12 border-2 focus:border-primary" 
+                        className="h-10 border-2 focus:border-primary" 
                         required 
                       />
                     </div>
@@ -1453,13 +1434,13 @@ function App() {
                       <Textarea 
                         id="message" 
                         name="message" 
-                        rows={4} 
+                        rows={3} 
                         className="border-2 focus:border-primary resize-none" 
                         placeholder="Tell us about your business, number of employees, and what services interest you most..."
                       />
                     </div>
                     
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                       <div className="flex items-start space-x-3">
                         <Checkbox id="consent" name="consent" className="mt-1" required />
                         <Label htmlFor="consent" className="text-sm leading-relaxed">
@@ -1474,18 +1455,18 @@ function App() {
                       
                       <Button 
                         type="submit" 
-                        className="w-full h-14 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift text-lg font-semibold"
+                        className="w-full h-12 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift font-semibold"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
                           <div className="flex items-center gap-2">
-                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                             Sending Message...
                           </div>
                         ) : (
                           <>
                             Send Message & Get Free Analysis
-                            <ArrowRight className="ml-2 h-5 w-5" />
+                            <ArrowRight className="ml-2 h-4 w-4" />
                           </>
                         )}
                       </Button>
@@ -1497,24 +1478,22 @@ function App() {
           </div>
 
           {/* Quick Contact Options */}
-          <div className="mt-16 text-center">
-            <p className="text-lg text-muted-foreground mb-8">
+          <div className="mt-12 text-center">
+            <p className="text-base text-muted-foreground mb-6">
               Prefer to talk directly? We're here to help!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
-                size="lg"
-                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-emerald-600 hover:to-green-500 btn-hover-lift px-8"
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-emerald-600 hover:to-green-500 btn-hover-lift px-6"
               >
-                <Phone className="mr-2 h-5 w-5" />
+                <Phone className="mr-2 h-4 w-4" />
                 Call (724) 418-2284
               </Button>
               <Button 
-                size="lg"
                 variant="outline"
-                className="border-2 btn-hover-lift px-8"
+                className="border-2 btn-hover-lift px-6"
               >
-                <EnvelopeSimple className="mr-2 h-5 w-5" />
+                <EnvelopeSimple className="mr-2 h-4 w-4" />
                 Email Us
               </Button>
             </div>
@@ -1524,30 +1503,30 @@ function App() {
 
       {/* Footer */}
       <footer className="bg-gradient-to-br from-muted/50 to-background border-t">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Company Info */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <Sparkle className="h-5 w-5 text-white" />
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                  <Sparkle className="h-4 w-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl text-foreground">Small Business Help Group</h3>
-                  <p className="text-sm text-muted-foreground">Reduce. Grow. Succeed.</p>
+                  <h3 className="font-bold text-lg text-foreground">Small Business Help Group</h3>
+                  <p className="text-xs text-muted-foreground">Reduce. Grow. Succeed.</p>
                 </div>
               </div>
-              <p className="text-muted-foreground leading-relaxed max-w-md">
+              <p className="text-muted-foreground leading-relaxed max-w-md text-sm">
                 Helping businesses reduce expenses and accelerate growth through strategic cost savings and growth services. 
                 Over $2.3M saved for 150+ satisfied clients.
               </p>
-              <div className="flex space-x-4">
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 btn-hover-lift">
-                  <FacebookLogo className="h-4 w-4 mr-2" />
+              <div className="flex space-x-3">
+                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 btn-hover-lift text-xs">
+                  <FacebookLogo className="h-3 w-3 mr-1" />
                   Facebook
                 </Button>
-                <Button size="sm" className="bg-blue-700 hover:bg-blue-800 btn-hover-lift">
-                  <LinkedinLogo className="h-4 w-4 mr-2" />
+                <Button size="sm" className="bg-blue-700 hover:bg-blue-800 btn-hover-lift text-xs">
+                  <LinkedinLogo className="h-3 w-3 mr-1" />
                   LinkedIn
                 </Button>
               </div>
@@ -1555,8 +1534,8 @@ function App() {
 
             {/* Services */}
             <div>
-              <h4 className="font-semibold text-foreground mb-6">Cost Reduction</h4>
-              <ul className="space-y-3">
+              <h4 className="font-semibold text-foreground mb-4 text-sm">Cost Reduction</h4>
+              <ul className="space-y-2">
                 {[
                   'PCMP Program',
                   'Community Solar',
@@ -1564,7 +1543,7 @@ function App() {
                   'Energy Supply'
                 ].map((service, index) => (
                   <li key={index}>
-                    <button className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    <button className="text-xs text-muted-foreground hover:text-primary transition-colors">
                       {service}
                     </button>
                   </li>
@@ -1574,8 +1553,8 @@ function App() {
 
             {/* Growth Services */}
             <div>
-              <h4 className="font-semibold text-foreground mb-6">Growth Services</h4>
-              <ul className="space-y-3">
+              <h4 className="font-semibold text-foreground mb-4 text-sm">Growth Services</h4>
+              <ul className="space-y-2">
                 {[
                   'Web Design',
                   'SEO Services',
@@ -1583,7 +1562,7 @@ function App() {
                   'Call Center Services'
                 ].map((service, index) => (
                   <li key={index}>
-                    <button className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    <button className="text-xs text-muted-foreground hover:text-primary transition-colors">
                       {service}
                     </button>
                   </li>
@@ -1593,8 +1572,8 @@ function App() {
 
             {/* Company & Contact */}
             <div>
-              <h4 className="font-semibold text-foreground mb-6">Company</h4>
-              <ul className="space-y-3 mb-8">
+              <h4 className="font-semibold text-foreground mb-4 text-sm">Company</h4>
+              <ul className="space-y-2 mb-6">
                 {[
                   { label: 'About Us', action: () => scrollToSection('about') },
                   { label: 'Contact', action: () => scrollToSection('contact') },
@@ -1604,7 +1583,7 @@ function App() {
                   <li key={index}>
                     <button 
                       onClick={item.action}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      className="text-xs text-muted-foreground hover:text-primary transition-colors"
                     >
                       {item.label}
                     </button>
@@ -1612,9 +1591,9 @@ function App() {
                 ))}
               </ul>
 
-              <div className="space-y-3">
-                <h5 className="font-medium text-foreground text-sm">Quick Contact</h5>
-                <div className="space-y-2">
+              <div className="space-y-2">
+                <h5 className="font-medium text-foreground text-xs">Quick Contact</h5>
+                <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <Phone className="h-3 w-3 text-primary" />
                     <span className="text-xs text-muted-foreground">(724) 418-2284</span>
@@ -1633,12 +1612,12 @@ function App() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-border/50 mt-16 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-muted-foreground">
+          <div className="border-t border-border/50 mt-12 pt-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+              <p className="text-xs text-muted-foreground">
                 &copy; 2024 Small Business Help Group. All rights reserved.
               </p>
-              <div className="flex items-center gap-6 text-xs text-muted-foreground">
+              <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <span>Made with ❤️ in Sharon, PA</span>
                 <span>•</span>
                 <span>Serving Nationwide</span>
