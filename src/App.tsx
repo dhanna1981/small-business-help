@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Slider } from '@/components/ui/slider'
 import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { toast, Toaster } from 'sonner'
 import { TermsOfService } from '@/components/TermsOfService'
 import { PrivacyPolicy } from '@/components/PrivacyPolicy'
@@ -55,6 +56,8 @@ function App() {
   const [showCookieBanner, setShowCookieBanner] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [hasScrolled, setHasScrolled] = useState(false)
+  const [showExitPopup, setShowExitPopup] = useState(false)
+  const [hasShownExitPopup, setHasShownExitPopup] = useState(false)
   const isMobile = useIsMobile()
 
   const pcmpSavings = pcmpEmployees[0] * 620
@@ -67,6 +70,32 @@ function App() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Exit intent and mobile timer popup logic
+  useEffect(() => {
+    if (hasShownExitPopup) return
+
+    if (isMobile) {
+      // Mobile: Show popup after 15 seconds
+      const timer = setTimeout(() => {
+        setShowExitPopup(true)
+        setHasShownExitPopup(true)
+      }, 15000)
+
+      return () => clearTimeout(timer)
+    } else {
+      // Desktop: Exit intent detection
+      const handleMouseLeave = (e: MouseEvent) => {
+        if (e.clientY <= 0 && !hasShownExitPopup) {
+          setShowExitPopup(true)
+          setHasShownExitPopup(true)
+        }
+      }
+
+      document.addEventListener('mouseleave', handleMouseLeave)
+      return () => document.removeEventListener('mouseleave', handleMouseLeave)
+    }
+  }, [isMobile, hasShownExitPopup])
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
@@ -99,6 +128,7 @@ function App() {
       setIsSubmitting(false)
       toast.success('Thank you! Your message has been sent. We\'ll get back to you within 24 hours.')
       e.currentTarget.reset()
+      setShowExitPopup(false) // Close popup after successful submission
     }, 2000)
   }
 
@@ -133,6 +163,136 @@ function App() {
   return (
     <div className="min-h-screen bg-background">
       <Toaster position="top-right" />
+      
+      {/* Exit Intent / Timer Popup */}
+      <Dialog open={showExitPopup} onOpenChange={setShowExitPopup}>
+        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center">
+                <Phone className="h-8 w-8 text-white" />
+              </div>
+              <DialogTitle className="text-2xl font-bold">
+                {isMobile ? "Don't Miss Out!" : "Wait! Before You Go..."}
+              </DialogTitle>
+              <p className="text-lg text-muted-foreground">
+                Get your FREE cost analysis and discover how much your business could save. 
+                It only takes 2 minutes!
+              </p>
+              <div className="flex items-center justify-center gap-6 text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Free consultation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>No obligation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>24hr response</span>
+                </div>
+              </div>
+            </div>
+          </DialogHeader>
+          
+          <form className="space-y-4 mt-6" onSubmit={handleContactSubmit}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="popup-firstName" className="text-sm font-medium">First Name *</Label>
+                <Input 
+                  id="popup-firstName" 
+                  name="firstName" 
+                  className="h-10 border-2 focus:border-primary" 
+                  required 
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="popup-lastName" className="text-sm font-medium">Last Name *</Label>
+                <Input 
+                  id="popup-lastName" 
+                  name="lastName" 
+                  className="h-10 border-2 focus:border-primary" 
+                  required 
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="popup-email" className="text-sm font-medium">Email Address *</Label>
+              <Input 
+                id="popup-email" 
+                name="email" 
+                type="email" 
+                className="h-10 border-2 focus:border-primary" 
+                required 
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="popup-phone" className="text-sm font-medium">Phone Number *</Label>
+              <Input 
+                id="popup-phone" 
+                name="phone" 
+                type="tel" 
+                className="h-10 border-2 focus:border-primary" 
+                required 
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="popup-message" className="text-sm font-medium">Tell us about your business</Label>
+              <Textarea 
+                id="popup-message" 
+                name="message" 
+                rows={3} 
+                className="border-2 focus:border-primary resize-none" 
+                placeholder="Number of employees, current challenges, services that interest you..."
+              />
+            </div>
+            
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <Checkbox id="popup-consent" name="consent" className="mt-1" required />
+                <Label htmlFor="popup-consent" className="text-sm leading-relaxed">
+                  I consent to be contacted by Small Business Help Group regarding their services *
+                </Label>
+              </div>
+              
+              {/* Honeypot */}
+              <div style={{ display: 'none' }}>
+                <Input name="honeypot" tabIndex={-1} autoComplete="off" />
+              </div>
+              
+              <div className="flex gap-3">
+                <Button 
+                  type="button"
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => setShowExitPopup(false)}
+                >
+                  Maybe Later
+                </Button>
+                <Button 
+                  type="submit" 
+                  className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary btn-hover-lift font-semibold"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Sending...
+                    </div>
+                  ) : (
+                    <>
+                      Get My FREE Analysis
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+
       {/* Cookie Banner */}
       {showCookieBanner && (
         <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary to-accent text-white p-6 z-50 backdrop-blur-sm border-t border-white/20">
