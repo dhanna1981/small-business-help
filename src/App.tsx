@@ -115,6 +115,12 @@ function App() {
     
     const formData = new FormData(e.currentTarget)
     
+    // Check honeypot
+    if (formData.get('honeypot')) {
+      setIsSubmitting(false)
+      return
+    }
+    
     // Safely get IP address
     let ipAddress = 'Unknown'
     try {
@@ -134,17 +140,36 @@ function App() {
       phone: formData.get('phone'),
       message: formData.get('message'),
       consent: formData.get('consent'),
+      honeypot: formData.get('honeypot'),
       ipAddress,
       timestamp: new Date().toISOString()
     }
 
-    // Simulate form submission (replace with actual PHPMailer endpoint)
-    setTimeout(() => {
+    try {
+      // Send to PHP contact handler
+      const response = await fetch('/contact.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.success) {
+        toast.success('Thank you! Your message has been sent. We\'ll get back to you within 24 hours.')
+        e.currentTarget.reset()
+        setShowExitPopup(false) // Close popup after successful submission
+      } else {
+        toast.error(result.error || 'Something went wrong. Please try again.')
+      }
+    } catch (error) {
+      console.error('Contact form error:', error)
+      toast.error('Unable to send message. Please try again or call us directly.')
+    } finally {
       setIsSubmitting(false)
-      toast.success('Thank you! Your message has been sent. We\'ll get back to you within 24 hours.')
-      e.currentTarget.reset()
-      setShowExitPopup(false) // Close popup after successful submission
-    }, 2000)
+    }
   }
 
   const handleEbookSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -152,6 +177,12 @@ function App() {
     setIsSubmitting(true)
     
     const formData = new FormData(e.currentTarget)
+    
+    // Check honeypot
+    if (formData.get('honeypot')) {
+      setIsSubmitting(false)
+      return
+    }
     
     // Safely get IP address
     let ipAddress = 'Unknown'
@@ -168,16 +199,35 @@ function App() {
     const data = {
       email: formData.get('email'),
       consent: formData.get('ebook-consent'),
+      honeypot: formData.get('honeypot'),
       ipAddress,
       timestamp: new Date().toISOString()
     }
 
-    // Simulate form submission (replace with actual PHPMailer endpoint)
-    setTimeout(() => {
+    try {
+      // Send to PHP ebook handler
+      const response = await fetch('/ebook.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.success) {
+        toast.success('Thank you! Check your email for the download link.')
+        e.currentTarget.reset()
+      } else {
+        toast.error(result.error || 'Something went wrong. Please try again.')
+      }
+    } catch (error) {
+      console.error('Ebook form error:', error)
+      toast.error('Unable to send download link. Please try again or contact us directly.')
+    } finally {
       setIsSubmitting(false)
-      toast.success('Thank you! Check your email for the download link.')
-      e.currentTarget.reset()
-    }, 2000)
+    }
   }
 
   if (currentView === 'terms') {
