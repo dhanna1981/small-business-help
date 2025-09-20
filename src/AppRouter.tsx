@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
-// Pages  
+// Pages
 import HomePage from '@/pages/HomePage'
 import AboutPage from '@/pages/AboutPage'
 import ServicesPage from '@/pages/ServicesPage' 

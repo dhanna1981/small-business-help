@@ -91,6 +91,36 @@ if (mail($to_email, $subject, $email_content, $header_string)) {
     $log_entry = date('Y-m-d H:i:s') . " - Contact form submission from $email ($firstName $lastName)\n";
     file_put_contents('contact_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
     
+    // TODO: Google Sheets Integration
+    // Uncomment and configure the following section to enable Google Sheets logging
+    /*
+    try {
+        // Google Sheets API integration would go here
+        // Example configuration:
+        // 1. Set up Google Sheets API credentials
+        // 2. Create service account key
+        // 3. Share spreadsheet with service account email
+        // 4. Use Google Client Library to append data
+        
+        // Sample code structure:
+        // require_once 'vendor/autoload.php';
+        // $client = new Google_Client();
+        // $client->setAuthConfig('path/to/service-account-key.json');
+        // $client->addScope(Google_Service_Sheets::SPREADSHEETS);
+        // $service = new Google_Service_Sheets($client);
+        // 
+        // $spreadsheetId = 'your-spreadsheet-id';
+        // $range = 'Sheet1!A:F';
+        // $values = [[$firstName, $lastName, $email, $phone, $message, $timestamp]];
+        // $body = new Google_Service_Sheets_ValueRange(['values' => $values]);
+        // $service->spreadsheets_values->append($spreadsheetId, $range, $body, ['valueInputOption' => 'RAW']);
+        
+    } catch (Exception $e) {
+        error_log('Google Sheets integration error: ' . $e->getMessage());
+        // Continue execution even if Google Sheets fails
+    }
+    */
+    
     // Return success response
     echo json_encode(['success' => true, 'message' => 'Message sent successfully']);
 } else {

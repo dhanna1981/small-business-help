@@ -127,6 +127,36 @@ if ($user_email_sent) {
     $log_entry = date('Y-m-d H:i:s') . " - E-book download request from $email\n";
     file_put_contents('ebook_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
     
+    // TODO: Google Sheets Integration
+    // Uncomment and configure the following section to enable Google Sheets logging
+    /*
+    try {
+        // Google Sheets API integration for ebook downloads
+        // Example configuration:
+        // 1. Set up Google Sheets API credentials
+        // 2. Create service account key
+        // 3. Share spreadsheet with service account email
+        // 4. Use Google Client Library to append data
+        
+        // Sample code structure:
+        // require_once 'vendor/autoload.php';
+        // $client = new Google_Client();
+        // $client->setAuthConfig('path/to/service-account-key.json');
+        // $client->addScope(Google_Service_Sheets::SPREADSHEETS);
+        // $service = new Google_Service_Sheets($client);
+        // 
+        // $spreadsheetId = 'your-ebook-spreadsheet-id';
+        // $range = 'Downloads!A:C';
+        // $values = [[$email, $timestamp, 'Cost Reduction Guide']];
+        // $body = new Google_Service_Sheets_ValueRange(['values' => $values]);
+        // $service->spreadsheets_values->append($spreadsheetId, $range, $body, ['valueInputOption' => 'RAW']);
+        
+    } catch (Exception $e) {
+        error_log('Google Sheets integration error: ' . $e->getMessage());
+        // Continue execution even if Google Sheets fails
+    }
+    */
+    
     // Return success response
     echo json_encode(['success' => true, 'message' => 'Download link sent to your email']);
 } else {
